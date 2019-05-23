@@ -33,7 +33,7 @@ namespace MCLScholarWeb.Storage
         public AzureBlobStorage(string containerName)
         {
             this.containerName = containerName;
-            string key = "Tbtu/aL5zX9VjGJ9Y139K03PfDzdHJkoJRU+0984ru2lHUYPKZ+J+0JT5kNFm707iBFzg+SiL2Y7d07DI0rNVA==";
+            string key = "<<Truncated>>";
 
             credentials = new StorageCredentials(accountName, key);
             storageAccount = new CloudStorageAccount(credentials, true);
