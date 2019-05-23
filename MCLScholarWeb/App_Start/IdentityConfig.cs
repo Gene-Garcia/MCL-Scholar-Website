@@ -21,7 +21,7 @@ namespace MCLScholarWeb
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            var apiKey = "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";
+            var apiKey = "<<Truncated>>";
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("SAOService@MCL.com", "SAO Service");
             var subject = message.Subject;
