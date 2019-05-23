@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Student Manual";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+}
+
+<style>
+    .text-justify {
+        line-height: 2.0;
+    }
+
+    #s-student-manual {
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-5 mb-4 bg-white rounded">
+                <h3 class="text-center mb-3">Welcome!</h3>
+                <p class="text-center" style="line-height: 2.0;">
+
+                    This website helps the student file their validation request to the Student Affairs Office (SAO) with the use of online request. You could have your scholarship validated but you must first secure the required documents needed. Information about the scholarship can be seen at LINK. However, the scholarship validation form can be generated here in the website as you choose your scholarship.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="shadow p-5 mb-4 bg-white rounded">
+                <h5 class="mb-3">Your Scholarhip</h5>
+                <p class="text-justify">
+
+                    In the <a href="/Student/StudentScholarship" class="text-link" style="font-weight: 600">Student Scholarship</a> you will see a table of the scholarships you have. The <span class="btn btn-primary btn-sm">Description</span> button will display the description of the scholarship
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-5 mb-4 bg-white rounded">
+                <h5 class="mb-3">Filing a Validation Request</h5>
+                <p class="text-justify">
+
+                    To file a request you need to go to <a href="/Student/RequestStatus" class="text-link" style="font-weight: 600">Student Scholarship</a> and navigate to the buttons. <span class="btn btn-outline-primary btn-sm">Sibling Discount</span> <span class="btn btn-outline-primary btn-sm">YGC Promotional Discount</span> <span class="btn btn-outline-primary btn-sm">MCL Study Aid</span> <span class="btn btn-info btn-sm">Validate</span> . Once the button is clicked you will be redirected to generating a scholarship validation form. You must add a jpeg image of your signature, preferably a square image so that your signature will not be distorted. If you upload a non jpeg file the validation process will not continue.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="shadow p-5 mb-4 bg-white rounded">
+                <h5 class="mb-3">Editing Request</h5>
+                <p class="text-justify">
+
+                    To edit request you must navigate to Request Status and click the <span class="btn btn-info btn-sm">Edit</span>. Once clicked your request will be displayed, specifically the documents or files you have uploaded. You can <span class="btn btn-warning btn-sm">Delete</span> files you have uploaded and upload new files. You must only upload pdf files.
+
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="shadow p-5 mb-4 bg-white rounded">
+                <h5 class="mb-3">Request Status</h5>
+                <p class="text-justify">
+
+                    The <a href="/Student/RequestStatus" class="text-link" style="font-weight: 600">Request Status</a> will display your request for validation. The <span class="btn btn-danger btn-sm">Remarks</span> button will display the message of the admin to your request. And the <span class="btn btn-info btn-sm">Edit</span> will redirect to editing the request.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-5 mb-4 bg-white rounded">
+                <h5 class="mb-3 text-warning">Important Reminders</h5>
+                <p class="text-justify">
+
+                    <span class="font-weight-bold">1. </span>You can only have 1 scholarship per term. But a voucher could also be filled for another request. You will not be able to file a request if you have a pending request for scholarship validation.
+
+                    <br>
+
+                    <span class="font-weight-bold">2. </span>There are scholarships that requires an application form if you are first time qualifier of the scholarship. You must accomplish the application prior to filing a validation request. Application form can be downloaded at Downloadable Forms. Listed below are the scholarships that requires an application form for first qualifier.
+
+                    <br>
+                    <span class="ml-3" style="line-height: 3.0;"><span class="font-weight-bold">1. </span>Sibling Discount</span>
+                    <br>
+                    <span class="ml-3" style="line-height: 3.0;"><span class="font-weight-bold">2. </span>YGC Promotional Discount</span>
+                    <br>
+                    <span class="ml-3" style="line-height: 3.0;"><span class="font-weight-bold">3. </span>MCL Study Aid</span>
+
+                    <br>
+
+                    <span class="font-weight-bold">3. </span>For Sibling Discount validation, each sibling must have have their own account to be able to file a request. In the validation process, the website will ask you for your common parent's name.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

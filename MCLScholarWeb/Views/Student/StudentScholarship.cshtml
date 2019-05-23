@@ -1,0 +1,331 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.PreValidatedStudent>
+@{
+    ViewBag.Title = "Student Scholarship";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #s-validate-scholarship {
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4 mb-5">Welcome</h1>
+
+    @if (ViewBag.IsValidationOpen)
+    {
+        if (Model != null && Model.Count() > 0)
+        {
+            <div class="table table-responsive-md shadow p-5 mb-5 bg-white rounded" >
+
+                <table class="table table-hover">
+                    <caption>Available Scholarship</caption>
+                    <thead>
+                        <tr>
+                            <th class="text-center">Scholarship Name</th>
+                            <th class="text-center">Scholarship Type</th>
+                            <th class="text-center">Term</th>
+                            <th class="text-center">Academic Year</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@item.Scholarship.ScholarshipName</td>
+                                <td class="text-center">@item.Scholarship.ScholarshipType.ScholarshipTypeName</td>
+                                <td class="text-center">@item.ValidationPeriod.Term</td>
+                                <td class="text-center">@item.ValidationPeriod.AcademicYearStart - @item.ValidationPeriod.AcademicYearEnd</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = item.ScholarshipID })" class="btn btn-sm btn-success mr-2 mb-2">
+                                        @*<a href="/Student/ScholarshipValidationForm?scholarshipID=@item.ScholarshipID" class="btn btn-sm btn-info">*@
+                                        Validate
+                                    </a>
+
+                                    <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal" data-target="#id_@item.ScholarshipID">
+                                        Scholarship Description
+                                    </button>
+
+                                        <div class="modal fade" id="id_@item.ScholarshipID">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">@item.Scholarship.ScholarshipName</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+
+                                                <div class="modal-body text-justify">
+                                                    <p>@item.Scholarship.ScholarshipDescription</p>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        }
+
+        if (ViewBag.NonListedScholarship != null)
+        {
+            var nonListedScholarships = ViewBag.NonListedScholarship as ICollection<MCLScholarWeb.Models.Entity.Scholarship>;
+
+            var siblingDiscount = (MCLScholarWeb.Models.Entity.Scholarship) nonListedScholarships.Where(model => model.ScholarshipName.ToLower() == "sibling discount").FirstOrDefault();
+            var mclStudyAid = (MCLScholarWeb.Models.Entity.Scholarship)nonListedScholarships.Where(model => model.ScholarshipName.ToLower() == "mcl study aid").FirstOrDefault();
+            var ygcPromotionalDiscount = (MCLScholarWeb.Models.Entity.Scholarship) nonListedScholarships.Where(model => model.ScholarshipName.ToLower() == "ygc promotional discount").FirstOrDefault();
+
+            <div class="shadow p-5 mb-5 bg-white rounded">
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#sibling-discount">Do you have enrolled siblings in MCL?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#mcl-study-aid">Do you have a parent working in MCL?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#ygc-promotional-discount">Do you have a parent working under YGC?</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div id="sibling-discount" class="tab-pane fade">
+                        <br>
+
+                        <div class="table table-responsive-md">
+
+                            <table class="table table-hover">
+                                <caption>Sibling Discount</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Scholarship Name</th>
+                                        <th class="text-center">Scholarship Type</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td class="text-center">@siblingDiscount.ScholarshipName</td>
+                                        <td class="text-center">@siblingDiscount.ScholarshipType.ScholarshipTypeName</td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = siblingDiscount.ScholarshipID })" class="btn btn-sm btn-success mr-2 mb-2">
+                                                Validate
+                                            </a>
+
+                                            <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal" data-target="#id_@siblingDiscount.ScholarshipID">
+                                                Scholarship Description
+                                            </button>
+
+                                            <div class="modal fade" id="id_@siblingDiscount.ScholarshipID">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">@siblingDiscount.ScholarshipName</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+
+                                                        <div class="modal-body text-justify">
+                                                            <p>@siblingDiscount.ScholarshipDescription</p>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div id="mcl-study-aid" class="tab-pane fade">
+                        <br>
+
+                        <div class="table table-responsive-md">
+                            <table class="table table-hover">
+                                <caption>MCL Study Aid</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Scholarship Name</th>
+                                        <th class="text-center">Scholarship Type</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td class="text-center">@mclStudyAid.ScholarshipName</td>
+                                        <td class="text-center">@mclStudyAid.ScholarshipType.ScholarshipTypeName</td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = mclStudyAid.ScholarshipID })" class="btn btn-sm btn-success  mr-2 mb-2">
+                                                Validate
+                                            </a>
+
+                                            <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal" data-target="#id_@mclStudyAid.ScholarshipID">
+                                                Scholarship Description
+                                            </button>
+
+                                            <div class="modal fade" id="id_@mclStudyAid.ScholarshipID">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">@mclStudyAid.ScholarshipName</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+
+                                                        <div class="modal-body text-justify">
+                                                            <p>@mclStudyAid.ScholarshipDescription</p>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>             
+                        
+                    </div>
+
+                    <div id="ygc-promotional-discount" class="tab-pane fade">
+                        <br>
+                        
+                        <div class="table table-responsive-md">
+                            <table class="table table-hover">
+                                <caption>YGC Promotional Discount</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Scholarship Name</th>
+                                        <th class="text-center">Scholarship Type</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td class="text-center">@ygcPromotionalDiscount.ScholarshipName</td>
+                                        <td class="text-center">@ygcPromotionalDiscount.ScholarshipType.ScholarshipTypeName</td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = ygcPromotionalDiscount.ScholarshipID })" class="btn btn-sm btn-success mr-2 mb-2">
+                                                Validate
+                                            </a>
+
+                                            <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal" data-target="#id_@ygcPromotionalDiscount.ScholarshipID">
+                                                Scholarship Description
+                                            </button>
+
+                                            <div class="modal fade" id="id_@ygcPromotionalDiscount.ScholarshipID">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">@ygcPromotionalDiscount.ScholarshipName</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+
+                                                        <div class="modal-body text-justify">
+                                                            <p>@ygcPromotionalDiscount.ScholarshipDescription</p>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>             
+
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    }
+    else
+    {
+        if (ViewBag.ValidationMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.ValidationMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+    }
+
+
+    @*<div>
+            <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = 10 })" class="btn btn-outline-success mr-2 mb-3">Sibling Discount</a>
+            <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = 12 })" class="btn btn-outline-success mr-2 mb-3">MCL Study Aid</a>
+            <a href="@Url.Action("ScholarshipValidationForm", "Student", new { scholarshipID = 11 })" class="btn btn-outline-success mr-2 mb-3">YGC Promotional Discount</a>
+        </div>*@
+</div>

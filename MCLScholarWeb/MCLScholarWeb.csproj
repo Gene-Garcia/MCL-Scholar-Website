@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60F38C63-1B27-4FE4-BCE9-36E5305DE813}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MCLScholarWeb</RootNamespace>
+    <AssemblyName>MCLScholarWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.3.3\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.10.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.10.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\AuditActions.cs" />
+    <Compile Include="Actions\ExcelActions.cs" />
+    <Compile Include="Actions\FileVerification.cs" />
+    <Compile Include="Actions\StudentActions.cs" />
+    <Compile Include="Actions\WebSettings.cs" />
+    <Compile Include="Actions\WebsiteContentActions.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountProfilesController.cs" />
+    <Compile Include="Controllers\AdminContentController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminDashboardController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecordsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\ModifyController.cs" />
+    <Compile Include="Controllers\WebsiteContentController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account\EmailModel.cs" />
+    <Compile Include="Models\Admin\AdminService.cs" />
+    <Compile Include="Models\Admin\AdminEditViewModel.cs" />
+    <Compile Include="Models\Admin\RequestViewModel.cs" />
+    <Compile Include="Models\BlobModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\Entity\AdminAuditLog.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Announcement.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\AnnouncementResource.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\AspNetRole.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\AspNetUser.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\AspNetUserClaim.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\AspNetUserLogin.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\AspNetUserRole.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\C__MigrationHistory.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\FileLocationStorage.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Form.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\FormsResource.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\MCLScholarDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCLScholarDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\MCLScholarDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\MCLScholarDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCLScholarDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Parent.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\PreValidatedStudent.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Program.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\RequestResource.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Scholarship.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\ScholarshipType.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\SiblingDiscount.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\StudentProfile.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\sysdiagram.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\UserProfile.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\UserProgram.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\ValidationPeriod.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\ValidationRequest.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\ValidationStatu.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\WebSetting.cs">
+      <DependentUpon>MCLScholarDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Manage\DetailsViewModel.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Manage\EditViewModel.cs" />
+    <Compile Include="Models\Manage\ManageViewModel.cs" />
+    <Compile Include="Models\ModelFactory\RequestViewModelFactory.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
+    <Compile Include="Models\Report\ReportsMasterViewModel.cs" />
+    <Compile Include="Models\RequestViewModel.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Storage\AzureBlobStorage.cs" />
+    <Compile Include="ViewModel\AnnouncementViewModel.cs" />
+    <Compile Include="ViewModel\FormViewModel.cs" />
+    <Compile Include="ViewModel\ScholarViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Documentation\body.png" />
+    <Content Include="Content\Documentation\footer.png" />
+    <Content Include="Content\Documentation\header.png" />
+    <Content Include="Content\Documentation\navbar.png" />
+    <Content Include="Content\Documentation\sidebar.png" />
+    <Content Include="Content\Documentation\studentbody.png" />
+    <Content Include="Content\Documentation\studentnavbar.png" />
+    <Content Include="Content\Images\back.png" />
+    <Content Include="Content\Images\cloud-upload.png" />
+    <Content Include="Content\Images\crown.png" />
+    <Content Include="Content\Images\Excel.png" />
+    <Content Include="Content\Images\facebook.png" />
+    <Content Include="Content\Images\homeicon.png" />
+    <Content Include="Content\Images\instagram.png" />
+    <Content Include="Content\Images\MCL.png" />
+    <Content Include="Content\Images\right-arrow.png" />
+    <Content Include="Content\Images\twitter.png" />
+    <Content Include="Content\Images\youtube.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\Entity\MCLScholarDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MCLScholarDB.edmx</DependentUpon>
+      <LastGenOutput>MCLScholarDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Entity\MCLScholarDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MCLScholarDB.edmx</DependentUpon>
+      <LastGenOutput>MCLScholarDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="obj\Debug\MCLScholarWeb.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\MCLScholarWeb.dll" />
+    <Content Include="obj\Debug\MCLScholarWeb.pdb" />
+    <Content Include="obj\Debug\TempPE\Models.MCLScholarDB.Context.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.MCLScholarDB.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.MCLScholarDB.Designer.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.MCLScholarModel.Context.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.MCLScholarModel.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.MCLScholarModel.Designer.cs.dll" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MCLScholarDB.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MCLScholarDB.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MCLScholarDB.ssdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MCLScholarModel.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MCLScholarModel.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MCLScholarModel.ssdl" />
+    <Content Include="obj\Debug\MCLScholarWeb.csproj.CopyComplete" />
+    <Content Include="obj\Debug\MCLScholarWeb.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\MCLScholarWeb.csprojAssemblyReference.cache" />
+    <Content Include="obj\Release\MCLScholarWeb.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Release\MCLScholarWeb.csprojAssemblyReference.cache" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dist\jspdf.debug.js" />
+    <Content Include="Scripts\dist\jspdf.min.js" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="README.md" />
+    <Content Include="Content\Template.xlsx" />
+    <EntityDeploy Include="Models\Entity\MCLScholarDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MCLScholarDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Entity\MCLScholarDB.edmx.diagram">
+      <DependentUpon>MCLScholarDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\AcroForm.js" />
+    <Content Include="Scripts\js\autoprint.js" />
+    <Content Include="Scripts\js\basic.js" />
+    <Content Include="Scripts\js\circles.js" />
+    <Content Include="Scripts\js\editor.js" />
+    <Content Include="Scripts\js\font-faces.js" />
+    <Content Include="Scripts\js\font-size.js" />
+    <Content Include="Scripts\js\from-html.js" />
+    <Content Include="Scripts\js\html2canvas.js" />
+    <Content Include="Scripts\js\images.js" />
+    <Content Include="Scripts\js\images_png.js" />
+    <Content Include="Scripts\js\jquery\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\js\jquery\jquery-ui-1.8.17.custom.min.js" />
+    <Content Include="Scripts\js\kitchen-sink.js" />
+    <Content Include="Scripts\js\landscape.js" />
+    <Content Include="Scripts\js\lines.js" />
+    <Content Include="Scripts\js\rectangles.js" />
+    <Content Include="Scripts\js\string-splitting.js" />
+    <Content Include="Scripts\js\test_harness.js" />
+    <Content Include="Scripts\js\text-colors.js" />
+    <Content Include="Scripts\js\theme-ambiance.js" />
+    <Content Include="Scripts\js\triangles.js" />
+    <Content Include="Scripts\js\two-page.js" />
+    <Content Include="Scripts\js\user-input.js" />
+    <Content Include="Content\CSS\AccountStyle.css" />
+    <Content Include="Content\Images\background.jfif" />
+    <Content Include="Content\Images\mcllogo.png" />
+    <Content Include="Content\Images\mcllogoonly.png" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\RegisterDetails.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Requests\Index.cshtml" />
+    <Content Include="Views\Admin\EditAccount.cshtml" />
+    <Content Include="Views\Admin\Accounts.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Requests\View.cshtml" />
+    <Content Include="Views\Admin\_ReviewList.cshtml" />
+    <Content Include="Views\Admin\UploadList.cshtml" />
+    <Content Include="Views\AdminContent\_EditAnnouncement.cshtml" />
+    <Content Include="Views\AdminContent\_EditForm.cshtml" />
+    <Content Include="Views\AdminContent\UploadScholarshipDetails.cshtml" />
+    <Content Include="Views\Admin\_PostAnnouncement.cshtml" />
+    <Content Include="Views\Admin\_UploadForm.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_MasterLayout.cshtml" />
+    <Content Include="Views\Shared\_StudentNavBar.cshtml" />
+    <Content Include="Views\Shared\_UserHeader.cshtml" />
+    <Content Include="Views\Shared\_WebsiteHeader.cshtml" />
+    <Content Include="Views\Shared\_WebsiteNavBar.cshtml" />
+    <Content Include="Views\Student\EditRequest.cshtml" />
+    <Content Include="Views\Student\RequestStatus.cshtml" />
+    <Content Include="Views\Student\ScholarshipValidationForm.cshtml" />
+    <Content Include="Views\Student\StudentScholarship.cshtml" />
+    <Content Include="Views\Student\ValidateScholarship.cshtml" />
+    <Content Include="Views\WebsiteContent\Announcement.cshtml" />
+    <Content Include="Views\WebsiteContent\DownloadableForms.cshtml" />
+    <Content Include="Views\WebsiteContent\Scholars.cshtml" />
+    <Content Include="Views\WebsiteContent\ScholarSelection.cshtml" />
+    <Content Include="Views\WebsiteContent\Scholarship.cshtml" />
+    <Content Include="Views\WebsiteContent\ScholarshipSelection.cshtml" />
+    <Content Include="Views\Website.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Shared\_MasterNavBar.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Scholarships.cshtml" />
+    <Content Include="Views\Admin\_ViewScholars.cshtml" />
+    <Content Include="Views\Admin\ScholarshipDetails.cshtml" />
+    <Content Include="Views\AdminDashboard\Dashboard.cshtml" />
+    <Content Include="Views\Admin\_CreateNonStudent.cshtml" />
+    <Content Include="Views\Admin\Announcements.cshtml" />
+    <Content Include="Views\Admin\ManageAccount.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\_Report.cshtml" />
+    <Content Include="Views\Admin\AuditLog.cshtml" />
+    <Content Include="Views\Account\_ViewAccount.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Settings\Edit.cshtml" />
+    <Content Include="Views\Settings\_AddPeriod.cshtml" />
+    <Content Include="Views\Student\StudentManual.cshtml" />
+    <Content Include="Views\Admin\AdminManual.cshtml" />
+    <Content Include="Views\Admin\Forms.cshtml" />
+    <Content Include="Views\Admin\_SiblingDiscount.cshtml" />
+    <Content Include="Views\Admin\Documentation.cshtml" />
+    <Content Include="Views\Admin\View.cshtml" />
+    <Content Include="Views\Records\Requests.cshtml" />
+    <Content Include="Views\Records\Scholars.cshtml" />
+    <Content Include="Views\Records\Students.cshtml" />
+    <Content Include="Views\Account\_StudentPartial.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\_RequestHistory.cshtml" />
+    <Content Include="Views\Admin\_CreateScholarship.cshtml" />
+    <Content Include="Views\Admin\_EditScholarship.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60045</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60045/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

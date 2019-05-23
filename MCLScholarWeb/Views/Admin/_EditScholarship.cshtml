@@ -1,0 +1,72 @@
+﻿@model MCLScholarWeb.Models.Entity.Scholarship
+
+@{
+
+
+    ViewBag.Title = "Edit Scholarship";
+    
+    List<SelectListItem> isBool = new List<SelectListItem>();
+    isBool.Add(new SelectListItem
+    {
+        Text = "Yes",
+        Value = true.ToString()
+    });
+    isBool.Add(new SelectListItem
+    {
+        Text = "No",
+        Value = false.ToString()
+    });
+
+
+
+}
+
+
+    <div class="col-lg-12">
+        @using (Html.BeginForm("EditScholarship", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(e => e.ScholarshipID)
+            @Html.HiddenFor(e => e.ScholarshipTypeID)
+            
+
+            <div class="row my-2 p-3">
+                <h4 class="col-lg-10">Edit Scholarship: @Model.ScholarshipName</h4>
+                <input type="submit" value="Submit" class="btn btn-primary col-md-2 float-right" />
+            </div>
+
+
+            <div>
+                <div class="card rounded border p-3 row">
+                    <div class="col-lg-12">
+                        <div class="row my-2">
+                            @Html.Label("Name", new { @class = "col-lg-2" })
+                            @Html.TextBoxFor(e => e.ScholarshipName, new { @class = "form-control col-lg-10" })
+                        </div>
+                        <div class="row my-2">
+                            <p class="col-lg-2">Is application required?</p>
+                            @*@Html.TextBoxFor(e => e.Type, new { @class = "form-control col-lg-4" })*@
+                            @Html.DropDownListFor(e => e.ApplicationForm, isBool, new { @class = "form-control  col-lg-4" })
+                        </div>
+                        <div class="row my-2">
+                            @Html.Label("Type", new { @class = "col-lg-2" })
+                            @*@Html.TextBoxFor(e => e.Type, new { @class = "form-control col-lg-4" })*@
+                            @Html.DropDownListFor(e => e.ApplicationForm, isBool, new { @class = "form-control  col-lg-4" })
+                        </div>
+                        <div class="row my-2">
+                            @Html.Label("Description", new { @class = "col-lg-2" })
+                            @Html.TextAreaFor(e => e.ScholarshipDescription, new { @class = "form-control col-lg-10", rows = "5" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row mb-2">
+            <button class="btn btn-danger ml-3" onclick="window.location.href = '@Url.Action("DeleteScholarship", "Admin",new{id=Model.ScholarshipID})';">Delete Scholarship</button>
+        </div>
+
+    </div>
+
+
+
+

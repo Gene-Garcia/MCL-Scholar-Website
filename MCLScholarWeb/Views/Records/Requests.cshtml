@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.ValidationRequest>
+
+@{
+    ViewBag.Title = "Requests";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Requests</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="p-4 shadow rounded" style="background:#ffffff">
+    <table class="table table-striped table-bordered" id="example">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scholarship.ScholarshipName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValidationStatu.StatusName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateFilled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.TWA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.GWA)
+                </th>
+                @*<th>
+                    Processed
+                </th>*@
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestID)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.UserID)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Scholarship.ScholarshipName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValidationStatu.StatusName)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.PeriodID)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateFilled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.TWA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.GWA)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Processed)
+                    </td>*@
+                    @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>

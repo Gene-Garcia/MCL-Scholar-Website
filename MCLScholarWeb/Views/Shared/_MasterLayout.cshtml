@@ -1,0 +1,171 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MCL Scholar Website</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    @*@Styles.Render("~/Content/Site.css")*@
+
+</head>
+<body>
+
+    @*@Styles.Render("~/Content/css")*@
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Site.css")" />
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .display-4 {
+            font-size: 35px;
+        }
+
+        footer p {
+            color: white;
+        }
+
+        #top-footer ul {
+            list-style-type: none;
+            color: #a5a5a5;
+        }
+
+        #bottom-footer p {
+            font-size: 15px;
+        }
+
+        .header {
+            font-size: 20px;
+            color: #c5c5c5;
+        }
+
+        #copyright {
+            color: #c5c5c5;
+            font-size: 15px;
+        }
+    </style>
+
+    @{
+        Html.RenderPartial("~/Views/Shared/_WebsiteHeader.cshtml");
+        Html.RenderPartial("~/Views/Shared/_MasterNavBar.cshtml");
+    }
+
+    @RenderBody()
+
+    <br /><br />
+
+    <div class="container-fluid" style="background-color:#292929;">
+        <footer class="p-3 mt-2" id="top-footer">
+            <div class="row" style="">
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-4" id="contact us">
+
+                    <ul class="nav flex-column" style="background-color:#292929;">
+
+                        <p class="header">Contact Us</p>
+
+                        <li class="nav-item mb-2">
+                            Malayan Colleges Laguna
+                        </li>
+                        <li class="nav-item mb-2">
+                            Trunkline: +63 (49) 832-400
+                        </li>
+                        <li class="nav-item mb-2">
+                            Facsimile: +63 (2) 519-4632
+                        </li>
+                        <li class="nav-item mb-2">
+                            mclinfo@mcl.edu.ph
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-4" id="follow-us">
+
+                    <p class="header">Follow Us</p>
+                    <br />
+                    <ul class="nav">
+
+                        <li class="nav-item">
+
+                            <a href="https://www.facebook.com/MalayanColleges/?ref=br_rs" target="_blank">
+                                <img src="~/Content/Images/facebook.png" width="25px" height="25px" />
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a href="https://twitter.com/MalayanLaguna?lang=en" target="_blank">
+                                <img src="~/Content/Images/twitter.png" width="25px" height="25px" />
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a href="https://www.instagram.com/malayanlaguna/?hl=en" target="_blank">
+                                <img src="~/Content/Images/instagram.png" width="25px" height="25px" />
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a href="https://www.youtube.com/user/malayancolleges" target="_blank">
+                                <img src="~/Content/Images/youtube.png" width="25px" height="25px" />
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a href="https://mcl.edu.ph" target="_blank">
+                                <img src="~/Content/Images/mcllogoonly.png" width="25px" height="25px" />
+                            </a>
+
+                        </li>
+
+                    </ul>
+                    <br />
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    <div class="container-fluid" style="background-color:#292929; margin-bottom:-20px;">
+        <footer>
+            <div class="row mt-3" style="background-color:#1b1b1b">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <p id="copyright" class="p-3">&copy; All Rights Reserved</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

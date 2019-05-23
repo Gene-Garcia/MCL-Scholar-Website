@@ -1,0 +1,113 @@
+﻿@model MCLScholarWeb.Models.Entity.WebSetting
+
+@{
+    /**/
+
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<MCLScholarWeb.Models.Entity.ValidationPeriod> ValidationPeriods = ViewBag.Periods;
+    var periods = ValidationPeriods.GroupBy(e => new { e.PeriodID, e.AcademicYearStart, e.AcademicYearEnd }).Select(e => new { PeriodID = e.Key.PeriodID, AcademicYearStart = e.Key.AcademicYearStart, AcademicYearEnd = e.Key.AcademicYearEnd, Terms = e.ToList() }).ToList();
+
+    List<SelectListItem> yearList = new List<SelectListItem>();
+    List<SelectListItem> termsList = new List<SelectListItem>();
+
+
+    foreach (var item in periods)
+    {
+        yearList.Add(new SelectListItem()
+        {
+            Text = item.AcademicYearStart + " - " + item.AcademicYearEnd,
+            Value = item.PeriodID.ToString()
+        });
+    }
+
+
+    List<SelectListItem> isBool = new List<SelectListItem>();
+    isBool.Add(new SelectListItem
+    {
+        Text = "Yes",
+        Value = true.ToString()
+    });
+    isBool.Add(new SelectListItem
+    {
+        Text = "No",
+        Value = false.ToString()
+    });
+
+
+
+
+
+}
+
+@using (Html.BeginForm("Index", "Settings", FormMethod.Post, new { role = "form " }))
+{
+    <div class="row my-2 p-2">
+        <h4>Settings</h4>
+        <div class="col">
+            <input type="submit" value="Save" class="btn btn-primary float-right" onclick="return confirm('Confirm Changes');" />
+
+        </div>
+    </div>
+    <div class="card rounded border p-3">
+        <div>
+            <div class="row">
+                <h5 class="pl-3">Validation Period</h5>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPeriod">
+                        Add Period
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label class=""> Academic Year: </label>
+                    @Html.DropDownListFor(model => model.PeriodID, yearList, new { @class = "form-control", id = "YearSelect" })
+                </div>
+                <div class="col-4">
+                    <label class="">Term: </label>
+                    @Html.DropDownListFor(model => model.ValidationPeriod.Term, termsList, new { @class = "form-control", id = "Terms" })
+                </div>
+                <div class="col-4">
+                    <label class="">Open Validation: </label>
+                    @Html.DropDownListFor(model => model.ValidationOpen, isBool, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+
+
+}
+<!-- Modal -->
+<div class="modal fade" id="AddPeriod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @{
+        Html.RenderPartial("_AddPeriod", new MCLScholarWeb.Models.Entity.ValidationPeriod());
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        loadTerms();
+    });
+
+    function loadTerms() {
+           var id = $("#YearSelect").val();
+        $.ajax({
+            url: '@Url.Action("GetTerms","Settings")',
+            data: { periodID: id },
+            dataType: "JSON",
+            type:"GET",
+            success: function (data) {
+                   $('#Terms').html('');
+                $.each(data, function (i, item) {
+                    $("#Terms").append($('<option></option>').val(item).html(item));
+
+                });
+            }
+        });
+    }
+
+    $("#YearSelect").change(function () {
+        loadTerms();
+    });
+</script>

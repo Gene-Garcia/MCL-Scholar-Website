@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.PreValidatedStudent>
+
+<h2>ReviewList</h2>
+<div>
+    @using (Html.BeginForm("UploadList", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Student Number
+                    </th>
+                    <th>
+                        Scholarship Name
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @Html.HiddenFor(e => item.PeriodID);
+                    @Html.HiddenFor(e => item.PreValidatedID);
+                    @Html.HiddenFor(e => item.ScholarshipID);
+                    @Html.HiddenFor(e => item.UserID);
+
+
+                    var profile = item.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile;
+
+                    <tr>
+                        <td>
+                            @profile.StudentID
+                        </td>
+                        <td>
+                            @item.Scholarship.ScholarshipName
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+
+        <button type="submit" class="btn btn-primary">Accept</button>
+
+    }
+
+
+
+</div>

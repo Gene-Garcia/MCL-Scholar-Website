@@ -1,0 +1,235 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MCL Scholar Website</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.css" />
+
+    <style>
+        .display-4 {
+            font-size: 35px;
+        }
+
+        .btn{
+            color:white;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: #ebebeb;
+        }
+
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -15rem;
+            -webkit-transition: margin .25s ease-out;
+            -moz-transition: margin .25s ease-out;
+            -o-transition: margin .25s ease-out;
+            transition: margin .25s ease-out;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 0.875rem 1.25rem;
+            font-size: 1.2rem;
+        }
+
+        #sidebar-wrapper .list-group {
+            width: 15rem;
+        }
+
+        #page-content-wrapper {
+            min-width: 100vw;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: 0;
+        }
+
+        #sidebar-wrapper {
+            margin-left: 0;
+            background-color: white;
+        }
+
+        #page-content-wrapper {
+            min-width: 0;
+            width: 100%;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: -15rem;
+        }
+
+        .list-group-item {
+            border-color: white;
+            margin-bottom: -20px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+
+    <nav class="navbar navbar-expand-lg border-bottom" style="background-color:#172851">
+        <button class="btn btn-sm bg-light text-dark" id="menu-toggle">&equiv;</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="btn btn-default text-light">
+                @*<img border="0" alt="Admin" src="~/Content/Images/homeicon.png" width="20" height="20">*@
+                &equiv;
+            </span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-3 mt-2">
+                <li class="nav-item text-light">
+                    <h5 class="">
+                        Malayan Colleges Laguna
+                    </h5>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto mt-lg-0">
+                <li class="nav-item active pr-2">
+                    <a href="/WebsiteContent/Announcement" data-toggle="tooltip" title="Administrator Tools" style="line-height: 35px;">
+                        <img border="0" alt="Admin" src="~/Content/Images/homeicon.png" width="20" height="20">
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @User.Identity.Name
+                    </a>
+                    <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Account/LogOff">Logout</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div class="d-flex" id="wrapper">
+
+        <div class="border-right" id="sidebar-wrapper">
+            <div class="list-group list-group-flush">
+
+                <h6 class="m-3 font-weight-bold">Validation Requests</h6>
+
+                @Html.ActionLink("Queue", "Index", "Requests", new { status = "Queue" }, new { @class = "list-group-item list-group-item-action", id = "r-queue" })
+                <br />
+                @Html.ActionLink("Approved", "Index", "Requests", new { status = "Approved" }, new { @class = "list-group-item list-group-item-action", id = "r-approved" })
+                <br />
+                @Html.ActionLink("Declined", "Index", "Requests", new { status = "Declined" }, new { @class = "list-group-item list-group-item-action", id = "r-declined" })
+                <br />
+                @Html.ActionLink("Missing Requirement(s)", "Index", "Requests", new { status = "Missing Requirement(s)" }, new { @class = "list-group-item list-group-item-action", id = "r-missing-requirements" })
+
+                <br />
+                <span class="border-bottom"></span>
+                @if (User.IsInRole("Administrator"))
+                {
+
+                    <h6 class="m-3 font-weight-bold">Website Content</h6>
+
+                    @Html.ActionLink("Announcements", "Announcements", "Admin", null, new { @class = "list-group-item list-group-item-action", id = "a-announcements" })
+                    <br />
+                    @Html.ActionLink("Scholarships", "Scholarships", "Admin", null, new { @class = "list-group-item list-group-item-action", id = "a-scholarships" })
+                    <br />
+                    @Html.ActionLink("Forms", "Forms", "Admin", null, new { @class = "list-group-item list-group-item-action", id = "a-forms" })
+                    <br />
+                    @Html.ActionLink("Upload List", "UploadList", "Admin", null, new { @class = "list-group-item list-group-item-action", id = "a-upload-list" })
+
+                    <br />
+                    <span class="border-bottom"></span>
+
+                    <h6 class="m-3 font-weight-bold">Statistics</h6>
+
+                    @Html.ActionLink("Term Report", "Index", "Reports", null, new { @class = "list-group-item list-group-item-action", id = "r-term-report" })
+                    <br />
+                    @Html.ActionLink("Audit Log", "AuditLog", "Admin", null, new { @class = "list-group-item list-group-item-action", id = "r-audit-log" })
+                    <br />
+                    @Html.ActionLink("Dashboard", "Dashboard", "AdminDashboard", null, new { @class = "list-group-item list-group-item-action", id = "r-dashboard" })
+
+                    @*
+            @Html.ActionLink("Students Record", "Students", "Reports", null, new { @class = "list-group-item list-group-item-action", id = "r-students-record" })
+            <br />
+            @Html.ActionLink("Requests Record", "Requests", "Reports", null, new { @class = "list-group-item list-group-item-action", id = "r-requests-record" })
+            <br />
+            @Html.ActionLink("Scholars Record", "Scholars", "Reports", null, new { @class = "list-group-item list-group-item-action", id = "r-scholars-record" })
+            <br />
+                    *@
+                    <br />
+                    <span class="border-bottom"></span>
+
+                    <h6 class="m-3 font-weight-bold">Accounts</h6>
+
+                    @Html.ActionLink("Administrators", "Accounts", "Admin", new { role = "Administrator" }, new { @class = "list-group-item list-group-item-action", id = "a-administrators" })
+                    <br />
+                    @Html.ActionLink("Co-Admin", "Accounts", "Admin", new { role = "Co-Admin" }, new { @class = "list-group-item list-group-item-action", id = "a-volunteers" })
+                    <br />
+                    @Html.ActionLink("Students", "Accounts", "Admin", new { role = "Student" }, new { @class = "list-group-item list-group-item-action", id = "a-students" })
+
+                    <br />
+                    <span class="border-bottom"></span>
+
+                    <h6 class="m-3 font-weight-bold">Others</h6>
+
+                    @Html.ActionLink("Documentation", "Documentation", "Admin", new { }, new { @class = "list-group-item list-group-item-action", id = "a-administrators" })
+                    <br />
+                    @Html.ActionLink("Settings", "Index", "Settings", new { }, new { @class = "list-group-item list-group-item-action", id = "a-students" })
+
+                    <br />
+                    <span class="border-bottom"></span>
+
+
+                }
+
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <div class="container">
+                @if (ViewBag.Message != null && ViewBag.MessageType != null)
+                {
+                    <div class="alert alert-@ViewBag.MessageType" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                @RenderBody()
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,20 @@
+﻿@model List<MCLScholarWeb.Models.Entity.ValidationRequest>
+
+@{
+    ViewBag.Title = "_SiblingDiscount";
+}
+    <div class="clas p-3">
+        @if (Model != null)
+        {
+    @foreach (var item in Model)
+    {
+        <div class="card p-3">
+            @Html.TextBox(item.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.FirstName, new { })
+            @Html.TextBox(item.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.MiddleName, new { })
+            @Html.TextBox(item.AspNetUser.UserProfiles.FirstOrDefault().StudentProfile.LastName, new { })
+        </div>
+    }
+}
+
+    </div>
+

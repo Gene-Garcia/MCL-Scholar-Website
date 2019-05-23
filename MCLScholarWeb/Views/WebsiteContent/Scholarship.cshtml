@@ -1,0 +1,63 @@
+﻿@model MCLScholarWeb.Models.Entity.Scholarship
+
+@{
+    ViewBag.Title = "Scholarship";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #h-scholarships {
+        font-weight: bold;
+    }
+    a:hover{
+        text-decoration:none;
+    }
+</style>
+
+<div class="container">
+
+    @{
+        try
+        {
+            <p class="text-danger">@ViewBag.errorMessage</p>
+        }
+        catch (Exception e) { }
+    }
+
+    @if (Model != null)
+    {
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="p-5 shadow p-3 mb-5 bg-white rounded">
+
+                    <h1 class="mb-3">@Html.DisplayFor(model => model.ScholarshipName)</h1>
+
+                    <hr />
+
+                    <h5 class="mb-4" style="line-height:1.8;">@Html.DisplayFor(model => model.ScholarshipDescription)</h5>
+
+                    <a href="@Url.Action("ScholarshipSelection", "WebsiteContent")" class="btn btn-success btn-lg mr-4">
+                        &#8629;
+                    </a>
+
+                    @if (User.IsInRole("Administrator"))
+                    {
+                    <a href="@Url.Action("UploadScholarshipDetails", "AdminContent", new { scholarshipID = Model.ScholarshipID })" class="text-info mr-3 mb-2">
+                        Upload Details
+                    </a>
+                    }
+
+
+
+                </div>
+                
+            </div>
+
+        </div>
+        
+    } 
+
+</div>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.Form>
+
+@{
+    ViewBag.Title = "Downloadable Forms";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #h-downloadable-forms {
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4 mb-5">Downloadable Forms</h1>
+
+
+    @if (Model != null)
+    {
+
+            foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-md-12 mb-5 p-4 shadow-lg rounded" style="border-color:white; border-radius:10px;">
+
+                        <div class="p-5">
+
+                            @{
+                                var resources = item.FormsResources;
+                            }
+
+                            @foreach (var resource in resources)
+                            {
+                                var fileLocation = resource.FileLocationStorage;
+
+                                <p>
+                                    <span class="mr-2 text-center font-weight-bold lead">@fileLocation.FileName</span>
+                                </p>
+
+                                <p class="mb-3">
+                                    @item.DateAdded
+                                </p>
+
+                                <p class="" style="line-height: 2.0;">@Html.DisplayFor(modelItem => item.Description)</p>
+
+                                <p class="text-info">
+                                    <i><a href="@fileLocation.FileLocation" class="btn btn-outline-info mr-3" target="_blank">@fileLocation.FileName</a></i>
+                                    <a href="@Url.Action("DownloadForm", "AdminContent", new { fileName = fileLocation.FileName })" class="btn btn-secondary">Direct Download</a>
+                                </p>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+    }
+
+</div>

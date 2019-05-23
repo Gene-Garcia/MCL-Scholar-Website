@@ -1,0 +1,83 @@
+﻿<style>
+    #webNav {
+        background: #172851;
+    }
+</style>
+<nav class="navbar navbar-expand-md bg-light navbar-light shadow-bottom" style="margin-top:-30px" id="webNav">
+    <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#website-nav-collapse">
+            <span class="icon-bar data-toggle" style="background-color:black;"></span>
+            <span class="icon-bar" style="background-color:black;"></span>
+            <span class="icon-bar" style="background-color:black"></span>
+        </button>
+
+    </div>
+
+    <div class="container">
+
+        <div class="navbar-collapse collapse m-2" id="website-nav-collapse">
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item active">
+                    <a href="/WebsiteContent/Announcement" class="nav-link" id="h-announcements">Announcements</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/WebsiteContent/DownloadableForms" class="nav-link" id="h-downloadable-forms">Downloadable Forms</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/WebsiteContent/ScholarshipSelection" class="nav-link" id="h-scholarships">Scholarships</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/WebsiteContent/ScholarSelection" class="nav-link" id="h-scholars">Scholars</a>
+                </li>
+            </ul>
+
+        <ul class="navbar-nav" style="float:right;">
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Administrator") || User.IsInRole("Co-Admin"))
+                {
+                    <li class="nav-item active pr-3">
+                        <a href="/Requests/Index" data-toggle="tooltip" title="Administrator Tools" style="line-height: 45px;">
+                            <img border="0" alt="Admin" src="~/Content/Images/crown.png" width="20" height="20">
+                        </a>
+                    </li>
+                }
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @User.Identity.Name
+            </a>
+           
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @if (User.IsInRole("Student"))
+                {
+                    <a href="/Manage/Index" class="dropdown-item" target="" id="h-login">Details</a>
+                }
+                <a class="dropdown-item" href="/Account/LogOff">Logout</a>
+            </div>
+        </li>
+
+
+                <li class="nav-item active">
+                </li>
+            }
+            else
+            {
+                <li class="nav-item active">
+                    <a href="/Account/Login" class="nav-link" target="" id="h-login">Log In</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+
+    </div>
+</nav>
+
+@*<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>*@

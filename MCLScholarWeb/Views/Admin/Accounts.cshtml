@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.AspNetUser>
+
+@{
+    ViewBag.Title = "Accounts";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<MCLScholarWeb.Models.Entity.Program> programs = ViewBag.Programs;
+}
+
+
+
+
+<div class="row m-2 p-2 mt-4">
+    <div class="col-lg-10">
+        <h4>Accounts: @ViewBag.Role</h4>
+    </div>
+    <div class="col-lg-2">
+        @if (!("Student").Equals(ViewBag.Role))
+        {
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Create New</button>
+
+        }
+        else if (("Student").Equals(ViewBag.Role))
+        {
+            @*<button class="btn btn-outline-primary">@Html.ActionLink("Add All Students", "AddAllStudents", "Account", new { Role = ViewBag.Role }, new { })</button>*@
+            <button class="btn btn-outline-primary">@Html.ActionLink("Add Student","Register","Account")</button>
+        }
+    </div>
+
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @{
+                Html.RenderPartial("_CreateNonStudent", new MCLScholarWeb.Models.Entity.RegisterViewModel(), new ViewDataDictionary { { "Role", ViewBag.Role } });
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="card rounded border p-3">
+    <table class="table display table-hover" id="Data" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    id
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <button class="btn" onclick="return confirm('Confirm Action');">@Html.ActionLink("Delete", "DeleteAccount", "Account", new { id = item.Id }, new { })</button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+
+<style>
+    #list {
+        background: #808080;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#Data').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false
+                }
+            ]
+        });
+
+        $('#Data tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            window.location.href = '/Account/Details/' + data[0];
+        });
+    });
+</script>

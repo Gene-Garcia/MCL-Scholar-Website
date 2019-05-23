@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.Announcement>
+
+
+@{
+    ViewBag.Title = "Announcements";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="row m-2 p-2 mt-4">
+    <h4 class="col-md-10 display-4 float-left">Announcements</h4>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target=".bd-example-modal-lg">Create New</button>
+    </div>
+</div>
+
+
+<div class="p-3" id="">
+    <div class="card rounded border p-3">
+        <table class="table display dt-responsive" id="Data">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>
+                        Subject
+                    </th>
+                    <th>
+                        Date Added
+                    </th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.AnnouncementID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.AnnouncementSubject)</td>
+                        <td>@item.DateAdded.ToShortDateString()</td>
+                        <td>
+                            @using (Ajax.BeginForm("EditAnnouncement", "AdminContent", new { announcementID = item.AnnouncementID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "editModalContent", OnSuccess = "$('#editModal').modal('show')" }))
+                            {
+                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                            }
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @{
+                Html.RenderPartial("_PostAnnouncement", new MCLScholarWeb.Models.Entity.Announcement());
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="editModal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="editModalContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    #list {
+        background: #808080;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#Data').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false
+                }
+            ]
+        });
+
+
+    });
+</script>

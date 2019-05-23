@@ -1,0 +1,117 @@
+﻿@model MCLScholarWeb.Models.Report.ReportsMasterViewModel
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.css" />
+</head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<div class="col-lg-12">
+
+    <div class="row">
+        <div class="col-2">
+            <img class="mx-auto" src="~/Content/Images/mcllogoonly.png" height="100" width="100" />
+        </div>
+        <div col="9">
+            <h4>
+                Malayan Colleges Laguna
+            </h4>
+            <h6>
+                Scholarship report for @Model.ValidationPeriods.FirstOrDefault().AcademicYearStart to @Model.ValidationPeriods.FirstOrDefault().AcademicYearEnd
+            </h6>
+            <h6>
+                Term: @Model.ValidationPeriods.FirstOrDefault().Term
+
+            </h6>
+            <h6 id="date"></h6>
+        </div>
+    </div>
+    <hr />
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            Invalidated Students: @Model.ValidationRequests.Where(e => !e.ValidationStatu.StatusName.Equals("Approved")).Count()
+        </div>
+        <div class="col-lg-12" ">
+            Validated Students: @Model.ValidationRequests.Where(e => e.ValidationStatu.StatusName.Equals("Approved")).Count()
+        </div>
+        <div class="col-lg-12" ">
+            Academic Scholarships
+            @Model.Scholarships.Where(e => e.ScholarshipType.ScholarshipTypeName.Equals("Academic Scholarship")).Count()
+        </div>
+        <div class="col-lg-12" ">
+            Non-Academic Scholarships
+            @Model.Scholarships.Where(e => !e.ScholarshipType.ScholarshipTypeName.Equals("Academic Scholarship")).Count()
+        </div>
+
+    </div>
+
+
+    Registered Student:@Model.UserProfiles.Count <br />
+    New Registered Students  <br />
+    Scholarships: @Model.Scholarships.Count <br />
+    Validated Students per Scholarship: <br />
+    @{
+        int count = 1;
+    }
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    No.
+                </th>
+                <th>
+                    Scholarship Name
+                </th>
+                <th>
+                    Scholar Count
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Scholarships)
+            {
+
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        @item.ScholarshipName
+                    </td>
+                    <td>
+                        @item.ValidationRequests.Where(e => e.PeriodID.Equals(ViewBag.PeriodID) && e.ValidationStatu.StatusName.Equals("Approved")).ToList().Count
+                    </td>
+                </tr>
+                count++;
+            }
+        </tbody>
+    </table>
+
+
+    <script>
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        $("#date").html("Generated: " + today);
+    </script>
+
+    <style>
+        p {
+            color: black;
+        }
+    </style>
+
+
+
+
+</div>

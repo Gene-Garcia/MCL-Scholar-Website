@@ -1,0 +1,46 @@
+﻿@model MCLScholarWeb.Models.Entity.Scholarship
+
+<div>
+    <h4>Scholarship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ScholarshipID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScholarshipID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScholarshipName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScholarshipName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScholarshipDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScholarshipDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

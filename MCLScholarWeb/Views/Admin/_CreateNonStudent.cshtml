@@ -1,0 +1,54 @@
+﻿@model MCLScholarWeb.Models.Entity.RegisterViewModel
+
+@{
+    ViewBag.Title = "Create Account";
+    string role = (string)ViewData["Role"];
+}
+
+
+
+
+@using (Html.BeginForm("CreateNonStudent", "Account", new { role = role }, FormMethod.Post))
+{
+    <div class="row mb-2 p-3">
+
+        <div class="col-lg-9">
+            <h5 class="pb-2">Login Details</h5>
+        </div>
+
+        <div class="col-lg-1 mb-2">
+            <input type="button" value="Back" onclick="@("window.location.href='" + @Url.Action("Accounts", "Admin",new { role = ViewBag.Role } ) + "'");" class="btn btn-success">
+        </div>
+
+        <div class="col-lg-1">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+
+    </div>  
+    <div class="rounded border p-3">
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="col-lg-12">
+            <div class="row form-group">
+                @Html.LabelFor(m => m.Email, new { @class = " control-label col-lg-2" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-lg-10" })
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(m => m.Password, new { @class = " control-label col-lg-2" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control col-lg-10" })
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = " control-label col-lg-2" })
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control col-lg-10" })
+            </div>
+        </div>
+
+        <hr>
+
+
+    </div>
+
+}
+

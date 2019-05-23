@@ -1,0 +1,332 @@
+﻿@model DASHBOARD.Models.DashboardModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@{
+    var earliestDateStart = Model.EarliestDateStart;
+    var latestDateEnd = Model.LatestDateEnd;
+
+    var chosenYearStart = Model.SelectedDateStart;
+    var chosenYearEnd = Model.SelectedDateEnd;
+
+    //var yearIteration = latestYearEnd - earliestYearStart;
+}
+
+<style>
+    canvas {
+        border-radius: 5px;
+        padding: 15px;
+        margin: 10px;
+        background-color:white;
+    }
+
+    .card-text {
+        color: black;
+    }
+    #card-top{
+        border: none;
+    }
+
+    #txtYearStart, #txtYearEnd{
+        background-color:white;
+        color: black;
+    }
+    #dashb{
+        background-color:#b1b1b1;
+        color:white;
+    }
+
+    #dashb a{
+        color:white;
+    }
+
+    canvas {
+        width:auto;
+        height:auto;
+
+        min-height: 150px;
+        min-width: 200px;
+    }
+</style>
+
+<div class="container">
+
+    <h1 class="display-4 mt-4 mb-3"">Dashboard</h1>
+
+    @using (Html.BeginForm("Dashboard", "AdminDashboard", FormMethod.Post))
+    {
+        <div class="row mb-3" style="padding-left:15px;">
+        <div class="col-md-4 mb-2">
+            <p class="control-label"><i>From</i></p>
+            <input type="date" name="dateStart" class="custom-select form-control" id="slctYearStart" min="@earliestDateStart" max="@latestDateEnd" value="@chosenYearStart" required>
+        </div>
+
+        <div class="col-md-4 mb-2">
+            <p class="control-label"><i>To</i></p>
+            <input type="date" name="dateEnd" class="custom-select form-control" id="slctYearEnd" min="@earliestDateStart" max="@latestDateEnd" value="@chosenYearEnd" required>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <p class="control-label"> <i>Press button to proceed</i> </p>
+            <input type="submit" id="btnSubmit" value="Go" class="form-control btn btn-info" />
+        </div>
+    </div>
+    }
+
+    <div class="row mb-3" style="padding-left:15px;" hidden>
+        <div class="col-md-4 mb-2">
+            <p class="control-label"> <i>Selected Start Date</i> </p>
+            <input type="text" id="txtYearStart" value="@chosenYearStart" class="form-control" disabled />
+        </div>
+
+        <div class="col-md-4 mb-2">
+            <p class="control-label"> <i>Selected Date End</i> </p>
+            <input type="text" id="txtYearEnd" value="@chosenYearEnd" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-12">
+            <canvas id="validationCountChart" class="shadow p-3 mb-3 bg-white rounded"></canvas>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-lg-6">
+            <canvas id="registeredStudentCountChart" width="35" height="25" class="shadow p-3 mb-3 bg-white rounded"></canvas>
+        </div>
+        <div class="col-lg-6">
+            <canvas id="academicNonAcademicChart" width="35" height="25" class="shadow p-3 mb-3 bg-white rounded"></canvas>
+        </div>
+    </div>
+
+    <div class="row mb-2" style="padding-left:25px;">
+        <div class="col-md-12 shadow p-3 mb-3 bg-white rounded" style="border-radius:10px;">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h4 class="mb-3">
+                        Scholarships
+                        <span class="badge badge-pill bg-info text-white" style="font-size:20px;">@Model.Scholarships</span>
+                    </h4>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+            @foreach (var item in Model.ScholarshipNames)
+            {   
+            <div class="col-md-4 mb-3">
+                <div class="shadow-sm bg-white rounded">
+                    <div class="p-3">
+                        <p class="" style="font-weight:600; color:black;">
+                            @item
+                        </p>
+                    </div>
+                </div>
+            </div>
+            }
+
+            </div>            
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        var date;
+        var month;
+        var year;
+
+        var dateStartRef;
+        var dateEndRef;
+
+        $('#slctYearStart').on('change', function () {
+            var dateObject = new Date($('#slctYearStart').val());
+
+            date = dateObject.getDate();
+            month = dateObject.getMonth() + 1;
+            year = dateObject.getFullYear();
+
+            if (date.toString().length == 1) date = "0" + date;
+            if (month.toString().length == 1) month = "0" + month;
+
+            dateStartRef = year + "-" + month + "-" + date;
+            console.log("datestartref" + dateStartRef);
+            $('#slctYearEnd').attr('min', dateStartRef);
+
+        });
+
+        $('#slctYearEnd').on('change', function () {
+            var dateObject = new Date($('#slctYearEnd').val());
+
+            date = dateObject.getDate();
+            month = dateObject.getMonth() + 1;
+            year = dateObject.getFullYear();
+
+            if (date.toString().length == 1) date = "0" + date;
+            if (month.toString().length == 1) month = "0" + month;
+
+            dateEndRef = year + "-" + month + "-" + date;
+            console.log("dateEndref " + dateEndRef);
+        });
+
+        console.log("start " + document.getElementById("txtYearStart").value + " end " + document.getElementById("txtYearEnd").value);
+
+        var parameter = { dateStart: document.getElementById("txtYearStart").value, dateEnd: document.getElementById("txtYearEnd").value };
+
+        //validated and not validated students, line chart
+        var validationCountDatachart = {
+            labels: [],
+            datasets: [
+                {
+                    label: "Validated Students",
+                    borderColor: "#3e95cd",
+                    backgroundColor: "#3e95cd",
+                    borderWidth: 2,
+                    fill: false,
+                    data: []
+                },
+                {
+                    label: "Invalidated Students",
+                    borderColor: "#8e5ea2",
+                    backgroundColor: "#8e5ea2",
+                    borderWidth: 2,
+                    fill: false,
+                    data: []
+                }
+            ]
+        };
+        $.getJSON("/AdminDashboard/GetValidationCount/", parameter, function (data) {
+            var counter = 0;
+
+            $.each(data, function (i, item) {
+                validationCountDatachart.labels.push(item.YearsSelected);
+                validationCountDatachart.datasets[0].data.push(item.ValidatedStudents);
+                validationCountDatachart.datasets[1].data.push(item.NotValidatedStudents);
+                console.log("yearselected " + item.YearsSelected);
+                console.log("yearselected " + item.ValidatedStudents);
+                console.log("yearselected " + item.NotValidatedStudents);
+                counter++;
+            });
+
+            var thirdChart = document.getElementById("validationCountChart").getContext("2d");
+
+            var type = "";
+            if (counter > 1) {
+                type = 'line';
+            } else {
+                type = 'bar';
+            }
+
+            var validationCountChart = new Chart(thirdChart,
+                {
+                    type: type,
+                    data: validationCountDatachart,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) { if (value % 1 === 0) { return value; } }
+                                }
+                            }]
+                        }
+                    }
+                });
+        });
+        //end
+
+        //academic and non academic scholars, bar
+        var academicNonAcademicDataChart = {
+            labels: ["Students"],
+            datasets: [
+                {
+                    label: "Academic Scholars",
+                    borderColor: "#fdfefe",
+                    backgroundColor: "#2ecc71",
+                    borderWidth: 3,
+                    data: []
+                },
+                {
+                    label: "Non Academic Scholars",
+                    borderColor: "#fdfefe",
+                    backgroundColor:"#9b59b6",
+                    borderWidth: 3,
+                    data: []
+                }
+            ]
+        };
+        $.getJSON("/AdminDashboard/GetAcademicAndNonScholarCount/", parameter, function (modelData) {
+
+            academicNonAcademicDataChart.datasets[0].data.push(modelData.AcademicScholars);
+            academicNonAcademicDataChart.datasets[1].data.push(modelData.NonAcademicScholars);
+
+            console.log("a " + modelData.AcademicScholars);
+            console.log("na " + modelData.NonAcademicScholars);
+
+            var chart = document.getElementById("academicNonAcademicChart").getContext("2d");
+
+            var academicNonAcademicChart = new Chart(chart,
+                {
+                    type: 'bar',
+                    data: academicNonAcademicDataChart,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) { if (value % 1 === 0) { return value; } }
+                                }
+                            }]
+                        }
+                    }
+                });
+
+        });
+        ////end
+
+        //total registered, active, inactive registered students, pie
+        var registeredStudentDatachart = {
+            labels:["SHS Students", "College Students"],
+            datasets: [
+                {
+                    label: "Students",
+                    borderColor: "#fdfefe",
+                    backgroundColor: ["#9b59b6","#2ecc71"],
+                    borderWidth: 5,
+                    data: []
+                }
+            ],
+        };
+        $.getJSON("/AdminDashboard/GetRegisteredStudentCount/", parameter, function (modelData) {
+
+            registeredStudentDatachart.datasets[0].data.push(modelData.SHSStudents);
+            registeredStudentDatachart.datasets[0].data.push(modelData.CollegeStudents);
+
+            console.log(modelData.SHSStudents);
+            console.log(modelData.CollegeStudents);
+
+            var fourthChart = document.getElementById("registeredStudentCountChart").getContext("2d");
+
+            var registeredStudentChart = new Chart(fourthChart,
+                {
+                    type: 'doughnut',
+                    data: registeredStudentDatachart,
+                    options: {}
+                });
+
+        });
+        //end
+
+    </script>
+
+}

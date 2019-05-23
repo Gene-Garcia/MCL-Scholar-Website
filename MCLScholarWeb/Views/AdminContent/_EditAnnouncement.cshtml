@@ -1,0 +1,122 @@
+﻿@model MCLScholarWeb.Models.Entity.Announcement
+
+@{
+    ViewBag.Title = "Edit Announcement";
+}
+
+<style>
+    #h-announcements {
+        admin text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+
+    @using (Html.BeginForm("EditAnnouncement", "AdminContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row p-2 mt-4">
+            <div class="col-6">
+                <h4 class="">Edit Announcement</h4>
+            </div>
+            <div class="col-6">
+                <input type="submit" value="Save" class="btn btn-primary float-right ml-2" onclick="return confirm('Confirm Action');" />
+                <a href="@Url.Action("ArchiveAnnouncement", "AdminContent", new { announcementID = Model.AnnouncementID })" class="btn btn-warning float-right" onclick="return confirm('Are you sure you want to Archive this announcement?');">Archive Announcement</a>
+            </div>
+        </div>
+
+
+        <div class="card rounded border p-3">
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.AnnouncementID)
+                @Html.HiddenFor(model => model.Status)
+                @Html.HiddenFor(model => model.DateAdded)
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.AnnouncementSubject, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="row">
+                        <p class="control-label col-md-10">Announcement Subject</p>
+                        @Model.DateAdded.ToString("MM/dd/yyyy")
+                    </div>
+
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.AnnouncementSubject, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.AnnouncementSubject, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.AnnouncementContent, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <p class="control-label col-md-12">Announcement Content</p>
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.AnnouncementContent, new { @class = "form-control", required = "required", rows = "5" })
+                        @Html.ValidationMessageFor(model => model.AnnouncementContent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                @*<center>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <input type="submit" value="Save" class="btn btn-outline-success btn-block" />
+                                <a href="@Url.Action("ArchiveAnnouncement", "AdminContent", new { announcementID = Model.AnnouncementID })" class="btn btn-outline-warning btn-block">Archive Announcement</a>
+                            </div>
+                        </div>
+                    </center>*@
+
+                <div class="form-group row">
+                    <p class="control-label col-4">Images: </p>
+                    <div class="col-8">
+                        <input type="file" accept="" class="float-right" name="photos" multiple="multiple" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+
+            @{
+                var resources = Model.AnnouncementResources;
+                foreach (var resource in resources)
+                {
+                    var locStorage = resource.FileLocationStorage;
+                    <div class="col-md-4">
+                        <img src="@locStorage.FileLocation" class="img img-responsive mb-2 mx-auto d-block" alt="" style="height: 80%; width: 80%; object-fit: contain;" />
+                        <center>
+                            <a href="@Url.Action("RemoveAnnouncementBlob", "AdminContent", new { file = locStorage.FileName, fileID = locStorage.FileID })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this picture?');">Delete Picture</a>
+                        </center>
+                    </div>
+                }
+            }
+
+            </div>
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,40 @@
+﻿@model MCLScholarWeb.Models.Entity.Account.EmailModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-heading pt-3">
+        </div>
+        <div class="modal-body px-4 mx-4 ">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h5 class="pb-2">Add Student Account</h5>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+
+                    <button type="submit" class="btn btn-primary col-3 float-right">Next</button>
+
+
+
+                @* Enable this once you have account confirmation enabled for password reset functionality
+            <p>
+            </p>*@
+            }
+            @*@<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </  div>*@
+        </div>
+    </div>
+</div>
+

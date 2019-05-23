@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.Scholarship>
+
+@{
+    ViewBag.Title = "Scholarships";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #h-scholarships {
+        font-weight: bold;
+    }
+    .card {
+        border-color: white;
+        border-radius: 10px;
+    }
+
+    .text-info{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4 mb-5">Scholarships</h1>
+
+    @if (Model != null)
+    {
+
+        <h4 class="font-weight-light">Academic Scholarships</h4>
+
+        <div class="row mb-4">
+            @foreach (var item in Model)
+            {
+                if (item.ScholarshipType.ScholarshipTypeName == "Academic Scholarship")
+                {
+                    <div class="col-md-4 p-4">
+
+                        <div class="card p-3 shadow p-3 bg-white rounded">
+                            <div class="card-body text-center">
+
+                                <a href="@Url.Action("Scholarship", "WebsiteContent" , new { scholarshipID = item.ScholarshipID })" class="text-info">
+                                    @item.ScholarshipName
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+
+        <h4 class="font-weight-light">Financial Aid</h4>
+
+        <div class="row mb-4">
+            @foreach (var item in Model)
+            {
+                if (item.ScholarshipType.ScholarshipTypeName == "Financial Aid")
+                {
+                    <div class="col-md-4 p-4">
+
+                        <div class="card p-3 shadow p-3 bg-white rounded">
+                            <div class="card-body text-center">
+
+                                <a href="@Url.Action("Scholarship", "WebsiteContent" , new { scholarshipID = item.ScholarshipID })" class="text-info">
+                                    @item.ScholarshipName
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+
+        <h4 class="font-weight-light">Voucher</h4>
+
+        <div class="row mb-4">
+            @foreach (var item in Model)
+            {
+                if (item.ScholarshipType.ScholarshipTypeName == "Voucher")
+                {
+                    <div class="col-md-4 p-4">
+
+                        <div class="card p-3 shadow p-3 bg-white rounded">
+                            <div class="card-body text-center">
+
+                                <a href="@Url.Action("Scholarship", "WebsiteContent" , new { scholarshipID = item.ScholarshipID })" class="text-info">
+                                    @item.ScholarshipName
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+
+    }
+
+</div>

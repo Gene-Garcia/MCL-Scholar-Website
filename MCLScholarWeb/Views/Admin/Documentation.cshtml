@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Documentation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row my-2 p-2">
+    <h4 class="col">Documentation</h4>
+</div>
+<style>
+    p {
+        color: #000000
+    }
+</style>
+
+<div class="card bg-white rounded border p-4 4 mb-2" id="introduction">
+    <h5>MCL Scholar Website Documentation</h5>
+    <p>This is the technical documentation for the MCL Scholar Website. This page aims to give future developers the knowledge to extend the website. </p>
+</div>
+
+<div class="card bg-white rounded border p-4 4 mb-2 " id="imports">
+    <h5>Libraries</h5>
+    <p>The website uses the following plugins/libararies/frameworks. For documentation of the external libraries please refer to the provided links</p>
+
+    <div class="row">
+        <div class="col-6">
+            <p>Front end</p>
+
+            <ul>
+                <li><a href="https://jquery.com/">jQuery</a></li>
+                <li><a href="https://datatables.net/">Datatables</a></li>
+                <li><a href="https://getbootstrap.com">Bootstrap</a></li>
+                <li><a href="https://www.chartjs.org/">Chart.js</a></li>
+            </ul>
+        </div>
+        <div class="col-6">
+            <p>Back end</p>
+            <ul>
+                <li><a href="https://dotnet.microsoft.com/apps/aspnet/mvc">ASP.NET MVC</a></li>
+                <li> <a href="https://docs.microsoft.com/en-us/ef/">Entity Framework</a></li>
+                <li><a href="https://docs.microsoft.com/en-us/aspnet/identity/overview/getting-started/introduction-to-aspnet-identity">Identity Framework</a></li>
+                <li> <a href="https://github.com/webgio/Rotativa/">Rotativa</a></li>
+                <li> <a href="https://archive.codeplex.com/?p=epplus">EPPlus</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="card bg-white rounded border p-4 mb-2" id="frontend">
+    <div>
+        <h5>Administrator Layout</h5>
+        <p>The layout of the administrator panel is composed of three components: Naviation Bar, Side bar, Main Body</p>
+        <div class="px-4">
+            <div class="row">
+                <h6>Navigation bar</h6>
+                <div class="col-lg-12">
+                    <img class="border mx-auto d-block" src="~/Content/Documentation/navbar.png" style="width:500px;height:auto;" />
+                </div>
+                <p>The Navigation bar of the website serves as a way to acces the user's accounts and to go to the website content</p>
+                <hr />
+            </div>
+            <div class="row">
+                <h6>Side bar</h6>
+                <div class="col-lg-12">
+                    <img class="border mx-auto d-block" src="~/Content/Documentation/sidebar.png" style="width:auto;height:300px;" />
+                </div>
+                <p>The side bar is the main mode of navigation of the user in the application. This may be extended by creating new items or sections</p>
+                <hr />
+            </div>
+            <div class="row">
+                <h6>Main Body</h6>
+                <div class="col-lg-12">
+                    <img class="border mx-auto d-block" src="~/Content/Documentation/body.png" style="width:500px;height:auto;margin:0 auto;" />
+                </div>
+                <p>The main body section where the body is loaded. It is usually composed of a header and the content of the body.</p>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card bg-white rounded border p-4 mb-2" id="frontend">
+    <div>
+        <h5>Student Layout</h5>
+        <p>The layout of the administrator panel is composed of three components: Naviation Bar, Side bar, Main Body</p>
+        <div class="px-4">
+            <div class="row">
+                <h6>Header</h6>
+                <div class="col-lg-12">
+                    <img class="border mx-auto d-block" src="~/Content/Documentation/header.png" style="width:500px;height:auto;" />
+                </div>
+                <p>The header shows the logo of Malayan Colleges Laguna and help the user navigate back to the homepage</p>
+                <hr />
+            </div>
+            <div class="row">
+                <h6>Student Navigation Bar</h6>
+                <div class="col-lg-12">
+                    <img class="border mx-auto d-block" src="~/Content/Documentation/studentnavbar.png" style="width:500px;height:auto" />
+                </div>
+                <p>The navigation bar is used by students to navigate around the content of the website that is open to everyone</p>
+                <hr />
+            </div>
+            <div class="row">
+                <h6>Main Body</h6>
+                <div class="col-lg-12">
+                    <img class="border mx-auto d-block" src="~/Content/Documentation/studentbody.png" style="width:500px;height:auto;margin:0 auto;" />
+                </div>
+                <p>The main body shows the content to be displayed.</p>
+                <hr />
+            </div>
+            <h6>Footer</h6>
+            <div class="col-lg-12">
+                <img class="border mx-auto d-block" src="~/Content/Documentation/footer.png" style="width:500px;height:auto;margin:0 auto;" />
+            </div>
+            <p>The footer shows the contact details of MCL aswell as its social media links.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="card bg-white rounded border p-4 4 mb-2" id="database">
+    <h5>Database</h5>
+    <p>The Entity Relationship Diagram of the database could be seen <a href="https://mclscholarres.blob.core.windows.net/announcementresources/Lipatdb.jpg">here</a></p>
+</div>
+
+<div class="card bg-white rounded border p-4 4 mb-2" id="backend">
+    <h5>Back End</h5>
+    <div class="px-4">
+        <p>The programming language used for the back end is C# and it uses the ASP.NET MVC framework. This section shall explain the processes of the system </p>
+
+
+        <h6>Validation Requests</h6>
+        <p>Validation Requests are queried by status from the database using entity framework and is displayed using datatables. See libraries section for more details.</p>
+
+        <h6>Announcement/Scholarships/Forms</h6>
+        <p>The items are also queried from the database using entity framework and is displayed by iterating over the model</p>
+        <p>The system uses the id as an identifier when editing the item</p>
+
+        <h6>Upload List of Scholars</h6>
+        <p>After the file is posted, the file is verified whether it is valid or not. Then using EPPlus, the data from the excel file is uploaded to the database </p>
+
+        <h6>Account Management</h6>
+        <p>Most of the account management is handled by identity framework. If the account to be registered has an email in the database of MCL then his account will be associated with that profile and the register process will be a success</p>
+        
+        <h6>Dashboard</h6>
+        <p>Once the user has entered a date range, the program will query the database using ajax and return the data within the date range. The data is passed into charts.js which creates the graphs</p>
+        
+        <h6>Generating a report</h6>
+        <p>Similar to the Dashboard, when the user selects a school year and term, the program uses ajax and queries the database for the relevant data. The rightful statistics are counted and displayed after </p>
+    </div>
+
+
+
+
+</div>
+
+<div class="card bg-white rounded border p-4 4 mb-2" id="userinterface">
+
+</div>
+
+

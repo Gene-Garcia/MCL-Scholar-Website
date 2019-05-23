@@ -1,0 +1,41 @@
+﻿@model MCLScholarWeb.Models.Entity.AspNetUser
+
+@{
+    /**/
+
+    ViewBag.Title = "Account Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row p-2 mt-4">
+    <div class="col-lg-10">
+        <h4>Account</h4>
+    </div>
+    <div class="col-lg-2">
+        <button class="btn btn-outline-primary" onclick="return confirm('Confirm Action');">@Html.ActionLink("Delete","DeleteAccount",new { id = Model.Id})</button>
+    </div>
+</div>
+
+<div class="col-12">
+    @Html.ActionLink("Return to List", "Accounts", "Admin", new { role = Model.AspNetUserRoles.FirstOrDefault().AspNetRole.Name }, new { @class = "text-primary" })
+</div>
+
+<div class="card rounded border p-3 my-2">
+    <h5>Details</h5>
+    <div class="row pt-3">
+        @Html.Label("Email", "Email", new { @class = "col-sm-1 col-form-label" })
+        @Html.Label("Email", Model.Email, new { @class = "border rounded p-2 col-lg-4" })
+        @Html.Label("Role", "Role", new { @class = "col-sm-1 col-form-label" })
+        @Html.Label("Role", Model.AspNetUserRoles.FirstOrDefault().AspNetRole.Name, new { @class = "border rounded p-2 col-lg-4" })
+    </div>
+
+</div>
+
+
+
+@if (Model.AspNetUserRoles.FirstOrDefault().AspNetRole.Name.Equals("Student"))
+{
+    Html.RenderPartial("_StudentPartial", Model.UserProfiles.First().StudentProfile);
+    Html.RenderPartial("_RequestHistory", Model.ValidationRequests);
+}

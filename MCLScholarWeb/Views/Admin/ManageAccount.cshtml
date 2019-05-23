@@ -1,0 +1,86 @@
+﻿@model MCLScholarWeb.Models.Entity.AspNetUser
+
+@{
+    ViewBag.Title = "ManageAccount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row ">
+    <h3>View Request</h3>
+    @Html.ActionLink("Back ", "Index")
+
+</div>
+
+<div>
+    <hr />
+    <div class="row ">
+        @if (Model.AspNetUserRoles.First().AspNetRole.Name.Equals("Student"))
+        {
+            <div class="col-lg-7">
+                <div class="shadow-sm p-4 pt-2">
+                    <div class="form">
+                        <h5>Details</h5>
+                        @Html.HiddenFor(model => model.Email)
+
+
+                        <div class="row my-2">
+                            <label class="col-lg-3">Name</label>
+                            <div class="col-lg-9">
+
+                                <div class="form-control-plaintext border rounded p-2">
+                                    @Html.DisplayFor(model => model.UserProfile.NameFirst)
+                                    @Html.DisplayFor(model => model.UserProfile.NameMiddle)
+                                    @Html.DisplayFor(model => model.UserProfile.NameLast)
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="shadow-sm p-4 pt-2">
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Scholarship Name
+                            </th>
+                            <th>
+                                Academic Year Start
+                            </th>
+                            <th>
+                                Academic Year End
+                            </th>
+                            <th>
+                                Term
+                            </th>
+                            <th>
+                                Date Filled
+                            </th>
+
+                            <th></th>
+                        </tr>
+                        <tr>
+                            @foreach (var item in Model.ValidationRequests.Where(e => e.ValidationStatu.StatusName.Equals("Approved")))
+                            {
+                                <td>@item.ScholarshipType.ScholarshipName</td>
+                                <td>@item.ValidationPeriod.AcademicYearStart</td>
+                                <td>@item.ValidationPeriod.AcademicYearEnd</td>
+                                <td>@item.ValidationPeriod.Term</td>
+                                <td>@item.DateFilled</td>
+                            }
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+
+
+        <div class="col-lg-5">
+            <div class="shadow-sm  p-4 pt-2">
+
+            </div>
+        </div>
+    </div>
+</div>
+

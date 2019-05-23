@@ -1,0 +1,41 @@
+﻿
+.login-form {
+    width: 30rem;
+    margin: 10rem auto;
+}
+
+.details-form {
+    width: 40rem;
+}
+
+.login-form form {
+    margin-bottom: 15px;
+    background: #ffffff;
+    padding: 10px;
+}
+
+.login-form h2 {
+    margin: 0 0 15px;
+}
+
+.form-control, .btn {
+    min-height: 38px;
+}
+
+.btn {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.styledbg {
+    /* The image used */
+    background: url("../Images/background.jfif") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}

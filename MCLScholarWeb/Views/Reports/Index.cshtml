@@ -1,0 +1,116 @@
+﻿@model MCLScholarWeb.Models.Entity.ValidationPeriod
+
+@{
+    ViewBag.Title = "Term Report";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<MCLScholarWeb.Models.Entity.ValidationPeriod> periodList = ViewBag.Periods;
+
+    List<SelectListItem> academicYearSelectList = new List<SelectListItem>();
+    periodList.ForEach(e => academicYearSelectList.Add(new SelectListItem()
+    {
+        Text = e.AcademicYearStart.ToString() + " - " + (e.AcademicYearEnd).ToString(),
+        Value = e.PeriodID.ToString()
+    }));
+
+    List<SelectListItem> termList = new List<SelectListItem>();
+    for (int i = 1; i <= 3; i++)
+    {
+        termList.Add(new SelectListItem()
+        {
+            Text = i.ToString(),
+            Value = i.ToString()
+        });
+    }
+
+}
+
+<div class="row">
+    <h4 class="display-4 ml-2 mt-4 mb-4">Term Report</h4>
+</div>
+
+<div class="card rounded border p-3">
+
+    <div class="row">
+        <div class="col-lg-1 mb-2">
+            <p class="text-center">Criteria</p>
+        </div>
+
+        <div class="col-lg-3 mb-2">
+            @Html.DropDownListFor(e => e.AcademicYearStart, academicYearSelectList, "School Year", new { @class = "form-control", @id = "YearStart" })
+        </div>
+
+        <div class="col-lg-2 mb-2">
+            @Html.DropDownListFor(e => e.Term, new List<SelectListItem>(), "Term", new { @class = "form-control", @id = "Term" })
+        </div>
+
+        <div class="col-lg-2 mb-2">
+            <button id="submit" class="btn btn-primary ">Submit</button>
+        </div>
+
+        <div class="col-lg-2 mb-2">
+            <button id="pdf" class="btn btn-default float-right text-primary col-lg-2">Export to PDF</button>
+        </div>
+    </div>
+
+</div>
+<div class="card rounded border p-3">
+
+    <div class="rounded-border" style="background:#ffffff">
+
+        <div id="ReportPartial" class="p-4">
+            <p class="font-weight-bold">Select a School Year and Term </p>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script>
+    $("#YearStart").change(function () {
+        $("#Term").empty();
+        var period = $("#YearStart").val();
+           $.ajax({
+            url: "@Url.Action("GetTerms", "Reports")",
+            data: {periodID:period},
+        type: "GET",
+        success: function (partialViewResult) {
+            partialViewResult.forEach(function (currVal) {
+                $("#Term").append('<option value="' +currVal + '">' + currVal+ '</option>');
+            });
+        }
+    });
+    });
+
+
+    $("#submit").click(function () {
+        var period = $("#YearStart").val();
+        var term = $("#Term").val();
+
+        if (period==""||term=="") {
+            alert("Please Fill up Both Dropboxes");
+        }
+        $.ajax({
+            url: "@Url.Action("ReportPartial", "Reports")",
+            data: {periodID:period,term:term},
+        type: "GET",
+            success: function (partialViewResult) {
+        $("#ReportPartial").empty();
+
+            $("#ReportPartial").html(partialViewResult);
+        }
+    });
+    });
+
+      $("#pdf").click(function () {
+        var periodID = $("#YearStart").val();
+          var term = $("#Term").val();
+           if (periodID==""||term=="") {
+            alert("Please Fill up Both Dropboxes");
+        }
+        window.location.href = "/Reports/ReportPDF?periodID=" + periodID + "&term=" + term;
+    });
+
+
+</script>

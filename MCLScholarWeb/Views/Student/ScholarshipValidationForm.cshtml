@@ -1,0 +1,177 @@
+﻿@model MCLScholarWeb.Models.Entity.AspNetUser
+
+@{
+    ViewBag.Title = "Scholarship Validation Form";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/js/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="~/Scripts/dist/jspdf.debug.js"></script>
+<script type="text/javascript" src="~/Scripts/js/basic.js"></script>
+
+<style>
+    input {
+        color:black;
+        background-color:white;
+        border-color:white;
+    }
+
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4 mb-5">Scholarship Validation Form Generator</h1>
+
+    @if (Model != null)
+    {
+        <div class="shadow p-5 mb-5 bg-white rounded" id="student-information">
+
+            <div class="row">
+                <p class="col-md-3 border-bottom rounded p-3">@DateTime.Now.ToString("MMM dd, yyyy")</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-5 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.FirstName</p>
+                <p class="col-md-2 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.MiddleName</p>
+                <p class="col-md-5 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.LastName</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-4 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.StudentID</p>
+                <p class="col-md-4 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.Program Strand</p>
+                <p class="col-md-4 border rounded p-3">Year @Model.UserProfiles.FirstOrDefault().StudentProfile.Year</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-3 border rounded p-3 font-weight-bold">Contact Number</p>
+                <p class="col-md-9 border rounded p-3">(+63) @Model.UserProfiles.FirstOrDefault().StudentProfile.ContactNumber</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-3 border rounded p-3 font-weight-bold">Scholarship Name</p>
+                <p class="col-md-9 border rounded p-3">@ViewBag.ScholarshipName</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-3 border rounded p-3 font-weight-bold">Scholarship Name</p>
+                <p class="col-md-9 border rounded p-3">@ViewBag.ScholarshipName</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-2 border rounded p-3 font-weight-bold">Academic Year</p>
+                <p class="col-md-4 border rounded p-3">@ViewBag.AcademicYear.ToString()</p>
+                <p class="col-md-2 border rounded p-3 font-weight-bold">Term</p>
+                <p class="col-md-4 border rounded p-3">@ViewBag.Term.ToString()</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-4 border rounded p-3 font-weight-bold">Term Weighted Average (TWA)</p>
+                <p class="col-md-4 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.TWA</p>
+                <p class="col-md-2 border rounded p-3 font-weight-bold">Admission Status</p>
+                <p class="col-md-2 border rounded p-3">OK</p>
+            </div>
+
+            <div class="row">
+                <p class="col-md-4 border rounded p-3 font-weight-bold">General Weighted Average (GWA)</p>
+                <p class="col-md-8 border rounded p-3">@Model.UserProfiles.FirstOrDefault().StudentProfile.GWA</p>
+            </div>
+
+        </div>
+
+        <input type="hidden" id="scholarshipID" value="@ViewBag.ScholarshipID" />
+        <input type="hidden" id="dateNow" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
+        <input type="hidden" id="firstName" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.FirstName" />
+        <input type="hidden" id="middleName" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.MiddleName" />
+        <input type="hidden" id="lastName" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.LastName" />
+
+        <input type="hidden" id="studentNumber" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.StudentID" />
+        <input type="hidden" id="program" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.Program" />
+        <input type="hidden" id="year" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.Year" />
+
+        <input type="hidden" id="contactNumber" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.ContactNumber" />
+
+        <input type="hidden" id="scholarshipName" value="@ViewBag.ScholarshipName" />
+
+        <input type="hidden" id="academicYear" value="@ViewBag.AcademicYear.ToString()" />
+        <input type="hidden" id="term" value="@ViewBag.Term.ToString()" />
+
+        <input type="hidden" id="twa" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.TWA" />
+        <input type="hidden" id="gwa" value="@Model.UserProfiles.FirstOrDefault().StudentProfile.GWA" />
+        <input type="hidden" id="admissionStatus" value="OK" />
+
+        <div class="row shadow p-5 mb-5 bg-white rounded">
+            <div class="col-md-6">
+                <p>Upload your signature</p>
+                <input type="file" id="load" class="col-md-12 mb-4" accept="image/jpeg">
+                <input type="submit" onclick="checkFields();" class=" col-md-3 btn btn-success btn-block" value="Generate Form" />
+            </div>
+            <div class="col-md-6 ">
+                <p class="font-weight-bold text-justify">What to do?</p>
+                <p class="text-justify">It is highly encouraged for your signature to be in a square image. It is also required to have the image as .jpg type.</p>
+                <p class="text-justify">To proceed to file your validation reqeust, you must first accomplish generating your validation form. And to do that you must upload your signature that follows the rule above.</p>
+            </div>
+        </div>
+
+        <div class="row shadow p-5 mb-5 bg-white rounded">
+            <img src="#" id="displayImg" align="left" style="height: 50%; width: 50%; object-fit: contain" class="mx-auto d-block col-md-5 mb-3" alt="your signature" required>
+        </div>
+
+    }
+
+</div>
+<script>
+    $('document').ready(function () {
+        $("#load").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#displayImg').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function checkFields() {
+
+        var firstName = document.getElementById("firstName").value;
+        var middleName = document.getElementById("middleName").value;
+        var lastName = document.getElementById("lastName").value;
+        var studentNumber = document.getElementById("studentNumber").value;
+        var program = document.getElementById("program").value;
+        var year = document.getElementById("year").value;
+        var contactNumber = document.getElementById("contactNumber").value;
+        var scholarshipName = document.getElementById("scholarshipName").value;
+        var twa = document.getElementById("twa").value;
+        var gwa = document.getElementById("gwa").value;
+
+        console.log(scholarshipName);
+
+        if (twa != "" && gwa != "" && firstName != "" && middleName != "" && lastName != "" && lastName != "" && studentNumber != "" && program != "" && year != "" && contactNumber != "" && scholarshipName != "") {
+            generateScholarshipForm();
+        } else {
+            alert("Please enter values to all fields to generate you validation form! Thank you!");
+        }
+    }
+</script>
+

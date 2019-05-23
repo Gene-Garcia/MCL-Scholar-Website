@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.ValidationRequest>
+
+<div class="card rounded border p-3 my-2">
+    <h4>Validation History</h4>
+    <table id="Data" class="table">
+        <thead>
+            <tr>
+                <th>
+                    Scholarship Name
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Date Filled
+                </th>
+                <th>
+                    Academic Year
+                </th>
+                <th>
+                    Term
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Scholarship.ScholarshipName
+                    </td>
+                    <td>
+                        @item.ValidationStatu.StatusName
+                    </td>
+                    <td>
+                        @item.DateFilled.ToString("MMM dd,yyy")
+                    </td>
+                    <td>
+                        @item.ValidationPeriod.AcademicYearStart to @item.ValidationPeriod.AcademicYearEnd
+                    </td>
+                    <td>
+                        @item.ValidationPeriod.Term
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+        $(document).ready(function () {
+            var table = $('#Data').DataTable();
+        });
+</script>

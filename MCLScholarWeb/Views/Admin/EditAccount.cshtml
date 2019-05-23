@@ -1,0 +1,163 @@
+﻿@model MCLScholarWeb.Models.Entity.Admin.AdminEditViewModel
+
+@{
+    ViewBag.Title = "EditAccount";
+    List<SelectListItem> listItems = new List<SelectListItem>();
+          Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+
+    foreach (var role in Model.Roles)
+    {
+        listItems.Add(new SelectListItem
+        {
+            Text = role,
+            Value = role
+        });
+
+    }
+    List<SelectListItem> programs = new List<SelectListItem>();
+    List<SelectListItem> year = new List<SelectListItem>();
+    List<MCLScholarWeb.Models.Entity.Program> dbprograms = (List<MCLScholarWeb.Models.Entity.Program>)ViewBag.Programs;
+
+    foreach (var prg in dbprograms)
+    {
+        programs.Add(new SelectListItem
+        {
+            Text = prg.ProgramName,
+            Value = prg.ProgramID.ToString()
+        });
+    }
+
+    year.Add(new SelectListItem
+    {
+        Text = "Select an Item",
+        Value = ""
+    });
+
+}
+
+<h2>Edit Account</h2>
+<div>
+    @Html.ActionLink("Back to List", "Accounts")
+</div>
+@using (Html.BeginForm("EditAccount", "Admin", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
+
+        <div class="row">
+            <div class="form-group col-6">
+                @Html.LabelFor(model => model.StudentID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StudentID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StudentID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-6">
+                @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.UserRole, listItems, "-- Select Status --", new { @class = "form-control" } )
+                    @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.NameFirst, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NameFirst, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NameFirst, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.NameMiddle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.NameMiddle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NameMiddle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.NameLast, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NameLast, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NameLast, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.EmailConfirmed)
+                    @Html.ValidationMessageFor(model => model.EmailConfirmed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="form-group col-6">
+                @Html.LabelFor(m => m.Program, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.Program, @programs, "Select A Program", new { @id = "ProgramID", @class = "form-control", })
+                @Html.ValidationMessageFor(model => model.Program, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group col-6">
+                @Html.LabelFor(m => m.Year, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.Year, @year, new { @id = "YearID", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#ProgramID").change(function () {
+            if ($("#ProgramID").val()=="") {
+                return;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetYearByID","Account")',
+                contentType: "application/json; charset=utf-8",
+                data: { value: $("#ProgramID").val() },
+                dataType: "json",
+                success: function (data) {
+                    $("#YearID").empty();
+                    $.each(data, function (i, year) {
+                        $("#YearID").append("<option value='" + year.Value + "'>" + year.Text + "</option>");
+                    });
+                }, failure: function (response) {
+                    alert("Fail: " + response.responseText);
+                },
+                error: function (response) {
+                    alert("Error: " + response.responseText);
+                }
+            });
+        });
+    });
+</script>

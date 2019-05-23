@@ -1,0 +1,2041 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="lipatdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminAuditLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Event" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AnnouncementResources">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="AnnouncementID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Announcements">
+          <Key>
+            <PropertyRef Name="AnnouncementID" />
+          </Key>
+          <Property Name="AnnouncementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnnouncementContent" Type="varchar(max)" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnnouncementSubject" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PeriodID" Type="int" />
+        </EntityType>
+        <EntityType Name="FileLocationStorage">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="FileLocation" Type="varchar(max)" Nullable="false" />
+          <Property Name="FileName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Type" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Forms">
+          <Key>
+            <PropertyRef Name="FormID" />
+          </Key>
+          <Property Name="FormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormsResources">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="FormID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parents">
+          <Key>
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="ParentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreValidatedStudents">
+          <Key>
+            <PropertyRef Name="PreValidatedID" />
+          </Key>
+          <Property Name="PreValidatedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ScholarshipID" Type="int" Nullable="false" />
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaxYear" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestResources">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="RequestID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scholarships">
+          <Key>
+            <PropertyRef Name="ScholarshipID" />
+          </Key>
+          <Property Name="ScholarshipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScholarshipName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ScholarshipDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="ApplicationForm" Type="bit" Nullable="false" />
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="ScholarshipTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScholarshipTypes">
+          <Key>
+            <PropertyRef Name="ScholarshipTypeID" />
+          </Key>
+          <Property Name="ScholarshipTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScholarshipTypeName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiblingDiscount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestID" Type="int" Nullable="false" />
+          <Property Name="ParentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentProfile">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="StudentID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GWA" Type="float" Nullable="false" />
+          <Property Name="TWA" Type="float" Nullable="false" />
+          <Property Name="Program" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Department" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileID" />
+          </Key>
+          <Property Name="UserProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProgram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProgramID" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ValidationPeriod">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AcademicYearStart" Type="int" Nullable="false" />
+          <Property Name="AcademicYearEnd" Type="int" Nullable="false" />
+          <Property Name="Term" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ValidationRequests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ScholarshipID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="DateFilled" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Processed" Type="bit" Nullable="false" />
+          <Property Name="DateEvaluated" Type="date" Nullable="false" />
+          <Property Name="AdminID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ValidationStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebSettings">
+          <Key>
+            <PropertyRef Name="SettingID" />
+          </Key>
+          <Property Name="SettingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="ValidationOpen" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AdminAuditLog_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminAuditLog" Type="Self.AdminAuditLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminAuditLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnnouncementResources_Announcements">
+          <End Role="Announcements" Type="Self.Announcements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnnouncementResources" Type="Self.AnnouncementResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcements">
+              <PropertyRef Name="AnnouncementID" />
+            </Principal>
+            <Dependent Role="AnnouncementResources">
+              <PropertyRef Name="AnnouncementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnnouncementResources_FileLocationStorage">
+          <End Role="FileLocationStorage" Type="Self.FileLocationStorage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnnouncementResources" Type="Self.AnnouncementResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileLocationStorage">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="AnnouncementResources">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Announcements_Announcements">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Announcements" Type="Self.Announcements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Announcements">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forms_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Forms" Type="Self.Forms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Forms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsResources_FileLocationStorage">
+          <End Role="FileLocationStorage" Type="Self.FileLocationStorage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormsResources" Type="Self.FormsResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileLocationStorage">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FormsResources">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsResources_Forms">
+          <End Role="Forms" Type="Self.Forms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormsResources" Type="Self.FormsResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="FormID" />
+            </Principal>
+            <Dependent Role="FormsResources">
+              <PropertyRef Name="FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreValidatedStudents_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PreValidatedStudents" Type="Self.PreValidatedStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreValidatedStudents">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreValidatedStudents_Scholarships">
+          <End Role="Scholarships" Type="Self.Scholarships" Multiplicity="1" />
+          <End Role="PreValidatedStudents" Type="Self.PreValidatedStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scholarships">
+              <PropertyRef Name="ScholarshipID" />
+            </Principal>
+            <Dependent Role="PreValidatedStudents">
+              <PropertyRef Name="ScholarshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreValidatedStudents_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="PreValidatedStudents" Type="Self.PreValidatedStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="PreValidatedStudents">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestResources_RequestResources">
+          <End Role="FileLocationStorage" Type="Self.FileLocationStorage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RequestResources" Type="Self.RequestResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileLocationStorage">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="RequestResources">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestResources_ValidationRequests">
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RequestResources" Type="Self.RequestResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="RequestResources">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scholarships_ScholarshipTypes">
+          <End Role="ScholarshipTypes" Type="Self.ScholarshipTypes" Multiplicity="1" />
+          <End Role="Scholarships" Type="Self.Scholarships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScholarshipTypes">
+              <PropertyRef Name="ScholarshipTypeID" />
+            </Principal>
+            <Dependent Role="Scholarships">
+              <PropertyRef Name="ScholarshipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scholarships_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="Scholarships" Type="Self.Scholarships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="Scholarships">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiblingDiscount_Parents">
+          <End Role="Parents" Type="Self.Parents" Multiplicity="1" />
+          <End Role="SiblingDiscount" Type="Self.SiblingDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parents">
+              <PropertyRef Name="ParentID" />
+            </Principal>
+            <Dependent Role="SiblingDiscount">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiblingDiscount_ValidationRequests">
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="1" />
+          <End Role="SiblingDiscount" Type="Self.SiblingDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="SiblingDiscount">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_StudentProfile">
+          <End Role="StudentProfile" Type="Self.StudentProfile" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentProfile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProgram_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProgram" Type="Self.UserProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProgram">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProgram_Program">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="UserProgram" Type="Self.UserProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="UserProgram">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_Scholarships">
+          <End Role="Scholarships" Type="Self.Scholarships" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scholarships">
+              <PropertyRef Name="ScholarshipID" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="ScholarshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_ValidationStatus">
+          <End Role="ValidationStatus" Type="Self.ValidationStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidationRequests" Type="Self.ValidationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebSettings_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="WebSettings" Type="Self.WebSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="WebSettings">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="lipatdbModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminAuditLog" EntityType="Self.AdminAuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnnouncementResources" EntityType="Self.AnnouncementResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Announcements" EntityType="Self.Announcements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileLocationStorage" EntityType="Self.FileLocationStorage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forms" EntityType="Self.Forms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormsResources" EntityType="Self.FormsResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreValidatedStudents" EntityType="Self.PreValidatedStudents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestResources" EntityType="Self.RequestResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scholarships" EntityType="Self.Scholarships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScholarshipTypes" EntityType="Self.ScholarshipTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiblingDiscount" EntityType="Self.SiblingDiscount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentProfile" EntityType="Self.StudentProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProgram" EntityType="Self.UserProgram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValidationPeriod" EntityType="Self.ValidationPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValidationRequests" EntityType="Self.ValidationRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValidationStatus" EntityType="Self.ValidationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebSettings" EntityType="Self.WebSettings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminAuditLog_AspNetUsers" Association="Self.FK_AdminAuditLog_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AdminAuditLog" EntitySet="AdminAuditLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnnouncementResources_Announcements" Association="Self.FK_AnnouncementResources_Announcements">
+            <End Role="Announcements" EntitySet="Announcements" />
+            <End Role="AnnouncementResources" EntitySet="AnnouncementResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnnouncementResources_FileLocationStorage" Association="Self.FK_AnnouncementResources_FileLocationStorage">
+            <End Role="FileLocationStorage" EntitySet="FileLocationStorage" />
+            <End Role="AnnouncementResources" EntitySet="AnnouncementResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Announcements_Announcements" Association="Self.FK_Announcements_Announcements">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Announcements" EntitySet="Announcements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ValidationPeriod" Association="Self.FK_AspNetUsers_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriod" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forms_AspNetUsers" Association="Self.FK_Forms_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Forms" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsResources_FileLocationStorage" Association="Self.FK_FormsResources_FileLocationStorage">
+            <End Role="FileLocationStorage" EntitySet="FileLocationStorage" />
+            <End Role="FormsResources" EntitySet="FormsResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsResources_Forms" Association="Self.FK_FormsResources_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="FormsResources" EntitySet="FormsResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreValidatedStudents_AspNetUsers" Association="Self.FK_PreValidatedStudents_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PreValidatedStudents" EntitySet="PreValidatedStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreValidatedStudents_Scholarships" Association="Self.FK_PreValidatedStudents_Scholarships">
+            <End Role="Scholarships" EntitySet="Scholarships" />
+            <End Role="PreValidatedStudents" EntitySet="PreValidatedStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreValidatedStudents_ValidationPeriod" Association="Self.FK_PreValidatedStudents_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriod" />
+            <End Role="PreValidatedStudents" EntitySet="PreValidatedStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestResources_RequestResources" Association="Self.FK_RequestResources_RequestResources">
+            <End Role="FileLocationStorage" EntitySet="FileLocationStorage" />
+            <End Role="RequestResources" EntitySet="RequestResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestResources_ValidationRequests" Association="Self.FK_RequestResources_ValidationRequests">
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+            <End Role="RequestResources" EntitySet="RequestResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scholarships_ScholarshipTypes" Association="Self.FK_Scholarships_ScholarshipTypes">
+            <End Role="ScholarshipTypes" EntitySet="ScholarshipTypes" />
+            <End Role="Scholarships" EntitySet="Scholarships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scholarships_ValidationPeriod" Association="Self.FK_Scholarships_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriod" />
+            <End Role="Scholarships" EntitySet="Scholarships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiblingDiscount_Parents" Association="Self.FK_SiblingDiscount_Parents">
+            <End Role="Parents" EntitySet="Parents" />
+            <End Role="SiblingDiscount" EntitySet="SiblingDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiblingDiscount_ValidationRequests" Association="Self.FK_SiblingDiscount_ValidationRequests">
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+            <End Role="SiblingDiscount" EntitySet="SiblingDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_AspNetUsers" Association="Self.FK_UserProfile_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_StudentProfile" Association="Self.FK_UserProfile_StudentProfile">
+            <End Role="StudentProfile" EntitySet="StudentProfile" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProgram_AspNetUsers" Association="Self.FK_UserProgram_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserProgram" EntitySet="UserProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProgram_Program" Association="Self.FK_UserProgram_Program">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="UserProgram" EntitySet="UserProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_AspNetUsers" Association="Self.FK_ValidationRequests_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_AspNetUsers1" Association="Self.FK_ValidationRequests_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_Scholarships" Association="Self.FK_ValidationRequests_Scholarships">
+            <End Role="Scholarships" EntitySet="Scholarships" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_ValidationPeriod" Association="Self.FK_ValidationRequests_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriod" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_ValidationStatus" Association="Self.FK_ValidationRequests_ValidationStatus">
+            <End Role="ValidationStatus" EntitySet="ValidationStatus" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebSettings_ValidationPeriod" Association="Self.FK_WebSettings_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriod" />
+            <End Role="WebSettings" EntitySet="WebSettings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="lipatdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminAuditLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Event" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AdminAuditLog_AspNetUsers" FromRole="AdminAuditLog" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AnnouncementResource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="AnnouncementID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Announcement" Relationship="Self.FK_AnnouncementResources_Announcements" FromRole="AnnouncementResources" ToRole="Announcements" />
+          <NavigationProperty Name="FileLocationStorage" Relationship="Self.FK_AnnouncementResources_FileLocationStorage" FromRole="AnnouncementResources" ToRole="FileLocationStorage" />
+        </EntityType>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="AnnouncementID" />
+          </Key>
+          <Property Name="AnnouncementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnnouncementContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AnnouncementSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AnnouncementResources" Relationship="Self.FK_AnnouncementResources_Announcements" FromRole="Announcements" ToRole="AnnouncementResources" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Announcements_Announcements" FromRole="Announcements" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" />
+          <NavigationProperty Name="AdminAuditLogs" Relationship="Self.FK_AdminAuditLog_AspNetUsers" FromRole="AspNetUsers" ToRole="AdminAuditLog" />
+          <NavigationProperty Name="Announcements" Relationship="Self.FK_Announcements_Announcements" FromRole="AspNetUsers" ToRole="Announcements" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+          <NavigationProperty Name="ValidationPeriod" Relationship="Self.FK_AspNetUsers_ValidationPeriod" FromRole="AspNetUsers" ToRole="ValidationPeriod" />
+          <NavigationProperty Name="Forms" Relationship="Self.FK_Forms_AspNetUsers" FromRole="AspNetUsers" ToRole="Forms" />
+          <NavigationProperty Name="PreValidatedStudents" Relationship="Self.FK_PreValidatedStudents_AspNetUsers" FromRole="AspNetUsers" ToRole="PreValidatedStudents" />
+          <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_AspNetUsers" FromRole="AspNetUsers" ToRole="UserProfile" />
+          <NavigationProperty Name="UserPrograms" Relationship="Self.FK_UserProgram_AspNetUsers" FromRole="AspNetUsers" ToRole="UserProgram" />
+          <NavigationProperty Name="ValidationRequests" Relationship="Self.FK_ValidationRequests_AspNetUsers" FromRole="AspNetUsers" ToRole="ValidationRequests" />
+          <NavigationProperty Name="ValidationRequests1" Relationship="Self.FK_ValidationRequests_AspNetUsers1" FromRole="AspNetUsers" ToRole="ValidationRequests" />
+        </EntityType>
+        <EntityType Name="FileLocationStorage">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FileLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AnnouncementResources" Relationship="Self.FK_AnnouncementResources_FileLocationStorage" FromRole="FileLocationStorage" ToRole="AnnouncementResources" />
+          <NavigationProperty Name="FormsResources" Relationship="Self.FK_FormsResources_FileLocationStorage" FromRole="FileLocationStorage" ToRole="FormsResources" />
+          <NavigationProperty Name="RequestResources" Relationship="Self.FK_RequestResources_RequestResources" FromRole="FileLocationStorage" ToRole="RequestResources" />
+        </EntityType>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="FormID" />
+          </Key>
+          <Property Name="FormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Forms_AspNetUsers" FromRole="Forms" ToRole="AspNetUsers" />
+          <NavigationProperty Name="FormsResources" Relationship="Self.FK_FormsResources_Forms" FromRole="Forms" ToRole="FormsResources" />
+        </EntityType>
+        <EntityType Name="FormsResource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="FormID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FileLocationStorage" Relationship="Self.FK_FormsResources_FileLocationStorage" FromRole="FormsResources" ToRole="FileLocationStorage" />
+          <NavigationProperty Name="Form" Relationship="Self.FK_FormsResources_Forms" FromRole="FormsResources" ToRole="Forms" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="ParentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SiblingDiscounts" Relationship="Self.FK_SiblingDiscount_Parents" FromRole="Parents" ToRole="SiblingDiscount" />
+        </EntityType>
+        <EntityType Name="PreValidatedStudent">
+          <Key>
+            <PropertyRef Name="PreValidatedID" />
+          </Key>
+          <Property Name="PreValidatedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScholarshipID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_PreValidatedStudents_AspNetUsers" FromRole="PreValidatedStudents" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Scholarship" Relationship="Self.FK_PreValidatedStudents_Scholarships" FromRole="PreValidatedStudents" ToRole="Scholarships" />
+          <NavigationProperty Name="ValidationPeriod" Relationship="Self.FK_PreValidatedStudents_ValidationPeriod" FromRole="PreValidatedStudents" ToRole="ValidationPeriod" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaxYear" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserPrograms" Relationship="Self.FK_UserProgram_Program" FromRole="Program" ToRole="UserProgram" />
+        </EntityType>
+        <EntityType Name="RequestResource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="RequestID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FileLocationStorage" Relationship="Self.FK_RequestResources_RequestResources" FromRole="RequestResources" ToRole="FileLocationStorage" />
+          <NavigationProperty Name="ValidationRequest" Relationship="Self.FK_RequestResources_ValidationRequests" FromRole="RequestResources" ToRole="ValidationRequests" />
+        </EntityType>
+        <EntityType Name="Scholarship">
+          <Key>
+            <PropertyRef Name="ScholarshipID" />
+          </Key>
+          <Property Name="ScholarshipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScholarshipName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ScholarshipDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApplicationForm" Type="Boolean" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="ScholarshipTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PreValidatedStudents" Relationship="Self.FK_PreValidatedStudents_Scholarships" FromRole="Scholarships" ToRole="PreValidatedStudents" />
+          <NavigationProperty Name="ScholarshipType" Relationship="Self.FK_Scholarships_ScholarshipTypes" FromRole="Scholarships" ToRole="ScholarshipTypes" />
+          <NavigationProperty Name="ValidationPeriod" Relationship="Self.FK_Scholarships_ValidationPeriod" FromRole="Scholarships" ToRole="ValidationPeriod" />
+          <NavigationProperty Name="ValidationRequests" Relationship="Self.FK_ValidationRequests_Scholarships" FromRole="Scholarships" ToRole="ValidationRequests" />
+        </EntityType>
+        <EntityType Name="ScholarshipType">
+          <Key>
+            <PropertyRef Name="ScholarshipTypeID" />
+          </Key>
+          <Property Name="ScholarshipTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScholarshipTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Scholarships" Relationship="Self.FK_Scholarships_ScholarshipTypes" FromRole="ScholarshipTypes" ToRole="Scholarships" />
+        </EntityType>
+        <EntityType Name="SiblingDiscount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestID" Type="Int32" Nullable="false" />
+          <Property Name="ParentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_SiblingDiscount_Parents" FromRole="SiblingDiscount" ToRole="Parents" />
+          <NavigationProperty Name="ValidationRequest" Relationship="Self.FK_SiblingDiscount_ValidationRequests" FromRole="SiblingDiscount" ToRole="ValidationRequests" />
+        </EntityType>
+        <EntityType Name="StudentProfile">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GWA" Type="Double" Nullable="false" />
+          <Property Name="TWA" Type="Double" Nullable="false" />
+          <Property Name="Program" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_StudentProfile" FromRole="StudentProfile" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileID" />
+          </Key>
+          <Property Name="UserProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserProfile_AspNetUsers" FromRole="UserProfile" ToRole="AspNetUsers" />
+          <NavigationProperty Name="StudentProfile" Relationship="Self.FK_UserProfile_StudentProfile" FromRole="UserProfile" ToRole="StudentProfile" />
+        </EntityType>
+        <EntityType Name="UserProgram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProgramID" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserProgram_AspNetUsers" FromRole="UserProgram" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Program" Relationship="Self.FK_UserProgram_Program" FromRole="UserProgram" ToRole="Program" />
+        </EntityType>
+        <EntityType Name="ValidationPeriod">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AcademicYearStart" Type="Int32" Nullable="false" />
+          <Property Name="AcademicYearEnd" Type="Int32" Nullable="false" />
+          <Property Name="Term" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ValidationPeriod" FromRole="ValidationPeriod" ToRole="AspNetUsers" />
+          <NavigationProperty Name="PreValidatedStudents" Relationship="Self.FK_PreValidatedStudents_ValidationPeriod" FromRole="ValidationPeriod" ToRole="PreValidatedStudents" />
+          <NavigationProperty Name="Scholarships" Relationship="Self.FK_Scholarships_ValidationPeriod" FromRole="ValidationPeriod" ToRole="Scholarships" />
+          <NavigationProperty Name="ValidationRequests" Relationship="Self.FK_ValidationRequests_ValidationPeriod" FromRole="ValidationPeriod" ToRole="ValidationRequests" />
+          <NavigationProperty Name="WebSettings" Relationship="Self.FK_WebSettings_ValidationPeriod" FromRole="ValidationPeriod" ToRole="WebSettings" />
+        </EntityType>
+        <EntityType Name="ValidationRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScholarshipID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="DateFilled" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Processed" Type="Boolean" Nullable="false" />
+          <Property Name="DateEvaluated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AdminID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_ValidationRequests_AspNetUsers" FromRole="ValidationRequests" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_ValidationRequests_AspNetUsers1" FromRole="ValidationRequests" ToRole="AspNetUsers" />
+          <NavigationProperty Name="RequestResources" Relationship="Self.FK_RequestResources_ValidationRequests" FromRole="ValidationRequests" ToRole="RequestResources" />
+          <NavigationProperty Name="Scholarship" Relationship="Self.FK_ValidationRequests_Scholarships" FromRole="ValidationRequests" ToRole="Scholarships" />
+          <NavigationProperty Name="SiblingDiscounts" Relationship="Self.FK_SiblingDiscount_ValidationRequests" FromRole="ValidationRequests" ToRole="SiblingDiscount" />
+          <NavigationProperty Name="ValidationPeriod" Relationship="Self.FK_ValidationRequests_ValidationPeriod" FromRole="ValidationRequests" ToRole="ValidationPeriod" />
+          <NavigationProperty Name="ValidationStatu" Relationship="Self.FK_ValidationRequests_ValidationStatus" FromRole="ValidationRequests" ToRole="ValidationStatus" />
+        </EntityType>
+        <EntityType Name="ValidationStatu">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ValidationRequests" Relationship="Self.FK_ValidationRequests_ValidationStatus" FromRole="ValidationStatus" ToRole="ValidationRequests" />
+        </EntityType>
+        <EntityType Name="WebSetting">
+          <Key>
+            <PropertyRef Name="SettingID" />
+          </Key>
+          <Property Name="SettingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="ValidationOpen" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ValidationPeriod" Relationship="Self.FK_WebSettings_ValidationPeriod" FromRole="WebSettings" ToRole="ValidationPeriod" />
+        </EntityType>
+        <Association Name="FK_AdminAuditLog_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminAuditLog" Type="Self.AdminAuditLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminAuditLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnnouncementResources_Announcements">
+          <End Role="Announcements" Type="Self.Announcement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnnouncementResources" Type="Self.AnnouncementResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcements">
+              <PropertyRef Name="AnnouncementID" />
+            </Principal>
+            <Dependent Role="AnnouncementResources">
+              <PropertyRef Name="AnnouncementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnnouncementResources_FileLocationStorage">
+          <End Role="FileLocationStorage" Type="Self.FileLocationStorage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnnouncementResources" Type="Self.AnnouncementResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileLocationStorage">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="AnnouncementResources">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Announcements_Announcements">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Announcements" Type="Self.Announcement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Announcements">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forms_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Forms" Type="Self.Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Forms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreValidatedStudents_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PreValidatedStudents" Type="Self.PreValidatedStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreValidatedStudents">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProgram_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProgram" Type="Self.UserProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProgram">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsResources_FileLocationStorage">
+          <End Role="FileLocationStorage" Type="Self.FileLocationStorage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormsResources" Type="Self.FormsResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileLocationStorage">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FormsResources">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestResources_RequestResources">
+          <End Role="FileLocationStorage" Type="Self.FileLocationStorage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RequestResources" Type="Self.RequestResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileLocationStorage">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="RequestResources">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsResources_Forms">
+          <End Role="Forms" Type="Self.Form" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FormsResources" Type="Self.FormsResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="FormID" />
+            </Principal>
+            <Dependent Role="FormsResources">
+              <PropertyRef Name="FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiblingDiscount_Parents">
+          <End Role="Parents" Type="Self.Parent" Multiplicity="1" />
+          <End Role="SiblingDiscount" Type="Self.SiblingDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parents">
+              <PropertyRef Name="ParentID" />
+            </Principal>
+            <Dependent Role="SiblingDiscount">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreValidatedStudents_Scholarships">
+          <End Role="Scholarships" Type="Self.Scholarship" Multiplicity="1" />
+          <End Role="PreValidatedStudents" Type="Self.PreValidatedStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scholarships">
+              <PropertyRef Name="ScholarshipID" />
+            </Principal>
+            <Dependent Role="PreValidatedStudents">
+              <PropertyRef Name="ScholarshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreValidatedStudents_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="PreValidatedStudents" Type="Self.PreValidatedStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="PreValidatedStudents">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProgram_Program">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="UserProgram" Type="Self.UserProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="UserProgram">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestResources_ValidationRequests">
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RequestResources" Type="Self.RequestResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="RequestResources">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scholarships_ScholarshipTypes">
+          <End Role="ScholarshipTypes" Type="Self.ScholarshipType" Multiplicity="1" />
+          <End Role="Scholarships" Type="Self.Scholarship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScholarshipTypes">
+              <PropertyRef Name="ScholarshipTypeID" />
+            </Principal>
+            <Dependent Role="Scholarships">
+              <PropertyRef Name="ScholarshipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scholarships_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="Scholarships" Type="Self.Scholarship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="Scholarships">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_Scholarships">
+          <End Role="Scholarships" Type="Self.Scholarship" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scholarships">
+              <PropertyRef Name="ScholarshipID" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="ScholarshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiblingDiscount_ValidationRequests">
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="1" />
+          <End Role="SiblingDiscount" Type="Self.SiblingDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="SiblingDiscount">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_StudentProfile">
+          <End Role="StudentProfile" Type="Self.StudentProfile" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentProfile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebSettings_ValidationPeriod">
+          <End Role="ValidationPeriod" Type="Self.ValidationPeriod" Multiplicity="1" />
+          <End Role="WebSettings" Type="Self.WebSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="WebSettings">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidationRequests_ValidationStatus">
+          <End Role="ValidationStatus" Type="Self.ValidationStatu" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidationRequests" Type="Self.ValidationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidationStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="ValidationRequests">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="lipatdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AdminAuditLogs" EntityType="Self.AdminAuditLog" />
+          <EntitySet Name="AnnouncementResources" EntityType="Self.AnnouncementResource" />
+          <EntitySet Name="Announcements" EntityType="Self.Announcement" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRole" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="FileLocationStorages" EntityType="Self.FileLocationStorage" />
+          <EntitySet Name="Forms" EntityType="Self.Form" />
+          <EntitySet Name="FormsResources" EntityType="Self.FormsResource" />
+          <EntitySet Name="Parents" EntityType="Self.Parent" />
+          <EntitySet Name="PreValidatedStudents" EntityType="Self.PreValidatedStudent" />
+          <EntitySet Name="Programs" EntityType="Self.Program" />
+          <EntitySet Name="RequestResources" EntityType="Self.RequestResource" />
+          <EntitySet Name="Scholarships" EntityType="Self.Scholarship" />
+          <EntitySet Name="ScholarshipTypes" EntityType="Self.ScholarshipType" />
+          <EntitySet Name="SiblingDiscounts" EntityType="Self.SiblingDiscount" />
+          <EntitySet Name="StudentProfiles" EntityType="Self.StudentProfile" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <EntitySet Name="UserPrograms" EntityType="Self.UserProgram" />
+          <EntitySet Name="ValidationPeriods" EntityType="Self.ValidationPeriod" />
+          <EntitySet Name="ValidationRequests" EntityType="Self.ValidationRequest" />
+          <EntitySet Name="ValidationStatus" EntityType="Self.ValidationStatu" />
+          <EntitySet Name="WebSettings" EntityType="Self.WebSetting" />
+          <AssociationSet Name="FK_AdminAuditLog_AspNetUsers" Association="Self.FK_AdminAuditLog_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AdminAuditLog" EntitySet="AdminAuditLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnnouncementResources_Announcements" Association="Self.FK_AnnouncementResources_Announcements">
+            <End Role="Announcements" EntitySet="Announcements" />
+            <End Role="AnnouncementResources" EntitySet="AnnouncementResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnnouncementResources_FileLocationStorage" Association="Self.FK_AnnouncementResources_FileLocationStorage">
+            <End Role="FileLocationStorage" EntitySet="FileLocationStorages" />
+            <End Role="AnnouncementResources" EntitySet="AnnouncementResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Announcements_Announcements" Association="Self.FK_Announcements_Announcements">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Announcements" EntitySet="Announcements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ValidationPeriod" Association="Self.FK_AspNetUsers_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriods" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forms_AspNetUsers" Association="Self.FK_Forms_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Forms" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreValidatedStudents_AspNetUsers" Association="Self.FK_PreValidatedStudents_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PreValidatedStudents" EntitySet="PreValidatedStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_AspNetUsers" Association="Self.FK_UserProfile_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProgram_AspNetUsers" Association="Self.FK_UserProgram_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserProgram" EntitySet="UserPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_AspNetUsers" Association="Self.FK_ValidationRequests_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_AspNetUsers1" Association="Self.FK_ValidationRequests_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsResources_FileLocationStorage" Association="Self.FK_FormsResources_FileLocationStorage">
+            <End Role="FileLocationStorage" EntitySet="FileLocationStorages" />
+            <End Role="FormsResources" EntitySet="FormsResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestResources_RequestResources" Association="Self.FK_RequestResources_RequestResources">
+            <End Role="FileLocationStorage" EntitySet="FileLocationStorages" />
+            <End Role="RequestResources" EntitySet="RequestResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsResources_Forms" Association="Self.FK_FormsResources_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="FormsResources" EntitySet="FormsResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiblingDiscount_Parents" Association="Self.FK_SiblingDiscount_Parents">
+            <End Role="Parents" EntitySet="Parents" />
+            <End Role="SiblingDiscount" EntitySet="SiblingDiscounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreValidatedStudents_Scholarships" Association="Self.FK_PreValidatedStudents_Scholarships">
+            <End Role="Scholarships" EntitySet="Scholarships" />
+            <End Role="PreValidatedStudents" EntitySet="PreValidatedStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreValidatedStudents_ValidationPeriod" Association="Self.FK_PreValidatedStudents_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriods" />
+            <End Role="PreValidatedStudents" EntitySet="PreValidatedStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProgram_Program" Association="Self.FK_UserProgram_Program">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="UserProgram" EntitySet="UserPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestResources_ValidationRequests" Association="Self.FK_RequestResources_ValidationRequests">
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+            <End Role="RequestResources" EntitySet="RequestResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scholarships_ScholarshipTypes" Association="Self.FK_Scholarships_ScholarshipTypes">
+            <End Role="ScholarshipTypes" EntitySet="ScholarshipTypes" />
+            <End Role="Scholarships" EntitySet="Scholarships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scholarships_ValidationPeriod" Association="Self.FK_Scholarships_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriods" />
+            <End Role="Scholarships" EntitySet="Scholarships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_Scholarships" Association="Self.FK_ValidationRequests_Scholarships">
+            <End Role="Scholarships" EntitySet="Scholarships" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiblingDiscount_ValidationRequests" Association="Self.FK_SiblingDiscount_ValidationRequests">
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+            <End Role="SiblingDiscount" EntitySet="SiblingDiscounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_StudentProfile" Association="Self.FK_UserProfile_StudentProfile">
+            <End Role="StudentProfile" EntitySet="StudentProfiles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_ValidationPeriod" Association="Self.FK_ValidationRequests_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriods" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebSettings_ValidationPeriod" Association="Self.FK_WebSettings_ValidationPeriod">
+            <End Role="ValidationPeriod" EntitySet="ValidationPeriods" />
+            <End Role="WebSettings" EntitySet="WebSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidationRequests_ValidationStatus" Association="Self.FK_ValidationRequests_ValidationStatus">
+            <End Role="ValidationStatus" EntitySet="ValidationStatus" />
+            <End Role="ValidationRequests" EntitySet="ValidationRequests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="lipatdbModelStoreContainer" CdmEntityContainer="lipatdbEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="lipatdbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminAuditLogs">
+            <EntityTypeMapping TypeName="lipatdbModel.AdminAuditLog">
+              <MappingFragment StoreEntitySet="AdminAuditLog">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnnouncementResources">
+            <EntityTypeMapping TypeName="lipatdbModel.AnnouncementResource">
+              <MappingFragment StoreEntitySet="AnnouncementResources">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="AnnouncementID" ColumnName="AnnouncementID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Announcements">
+            <EntityTypeMapping TypeName="lipatdbModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcements">
+                <ScalarProperty Name="AnnouncementID" ColumnName="AnnouncementID" />
+                <ScalarProperty Name="AnnouncementContent" ColumnName="AnnouncementContent" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AnnouncementSubject" ColumnName="AnnouncementSubject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="lipatdbModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="lipatdbModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="lipatdbModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="lipatdbModel.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="lipatdbModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileLocationStorages">
+            <EntityTypeMapping TypeName="lipatdbModel.FileLocationStorage">
+              <MappingFragment StoreEntitySet="FileLocationStorage">
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="FileLocation" ColumnName="FileLocation" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forms">
+            <EntityTypeMapping TypeName="lipatdbModel.Form">
+              <MappingFragment StoreEntitySet="Forms">
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormsResources">
+            <EntityTypeMapping TypeName="lipatdbModel.FormsResource">
+              <MappingFragment StoreEntitySet="FormsResources">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="lipatdbModel.Parent">
+              <MappingFragment StoreEntitySet="Parents">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreValidatedStudents">
+            <EntityTypeMapping TypeName="lipatdbModel.PreValidatedStudent">
+              <MappingFragment StoreEntitySet="PreValidatedStudents">
+                <ScalarProperty Name="PreValidatedID" ColumnName="PreValidatedID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ScholarshipID" ColumnName="ScholarshipID" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="lipatdbModel.Program">
+              <MappingFragment StoreEntitySet="Program">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="MaxYear" ColumnName="MaxYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestResources">
+            <EntityTypeMapping TypeName="lipatdbModel.RequestResource">
+              <MappingFragment StoreEntitySet="RequestResources">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scholarships">
+            <EntityTypeMapping TypeName="lipatdbModel.Scholarship">
+              <MappingFragment StoreEntitySet="Scholarships">
+                <ScalarProperty Name="ScholarshipID" ColumnName="ScholarshipID" />
+                <ScalarProperty Name="ScholarshipName" ColumnName="ScholarshipName" />
+                <ScalarProperty Name="ScholarshipDescription" ColumnName="ScholarshipDescription" />
+                <ScalarProperty Name="ApplicationForm" ColumnName="ApplicationForm" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="ScholarshipTypeID" ColumnName="ScholarshipTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScholarshipTypes">
+            <EntityTypeMapping TypeName="lipatdbModel.ScholarshipType">
+              <MappingFragment StoreEntitySet="ScholarshipTypes">
+                <ScalarProperty Name="ScholarshipTypeID" ColumnName="ScholarshipTypeID" />
+                <ScalarProperty Name="ScholarshipTypeName" ColumnName="ScholarshipTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiblingDiscounts">
+            <EntityTypeMapping TypeName="lipatdbModel.SiblingDiscount">
+              <MappingFragment StoreEntitySet="SiblingDiscount">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentProfiles">
+            <EntityTypeMapping TypeName="lipatdbModel.StudentProfile">
+              <MappingFragment StoreEntitySet="StudentProfile">
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="GWA" ColumnName="GWA" />
+                <ScalarProperty Name="TWA" ColumnName="TWA" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="lipatdbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="lipatdbModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPrograms">
+            <EntityTypeMapping TypeName="lipatdbModel.UserProgram">
+              <MappingFragment StoreEntitySet="UserProgram">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValidationPeriods">
+            <EntityTypeMapping TypeName="lipatdbModel.ValidationPeriod">
+              <MappingFragment StoreEntitySet="ValidationPeriod">
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="AcademicYearStart" ColumnName="AcademicYearStart" />
+                <ScalarProperty Name="AcademicYearEnd" ColumnName="AcademicYearEnd" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValidationRequests">
+            <EntityTypeMapping TypeName="lipatdbModel.ValidationRequest">
+              <MappingFragment StoreEntitySet="ValidationRequests">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ScholarshipID" ColumnName="ScholarshipID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="DateFilled" ColumnName="DateFilled" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="DateEvaluated" ColumnName="DateEvaluated" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValidationStatus">
+            <EntityTypeMapping TypeName="lipatdbModel.ValidationStatu">
+              <MappingFragment StoreEntitySet="ValidationStatus">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebSettings">
+            <EntityTypeMapping TypeName="lipatdbModel.WebSetting">
+              <MappingFragment StoreEntitySet="WebSettings">
+                <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="ValidationOpen" ColumnName="ValidationOpen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

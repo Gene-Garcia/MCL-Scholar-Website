@@ -1,0 +1,183 @@
+﻿@model MCLScholarWeb.Models.Entity.ValidationRequest
+
+@{
+    ViewBag.Title = "View Request";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+    List<SelectListItem> statuses = new List<SelectListItem>();
+    List<MCLScholarWeb.Models.Entity.ValidationStatu> statu = ViewBag.Statuses;
+    foreach (var item in statu)
+    {
+        statuses.Add(new SelectListItem
+        {
+            Text = item.StatusName,
+            Value = item.StatusID.ToString()
+        });
+    }
+}
+
+<div class="row my-2 p-2">
+    <h4 class="col-9">Request Details</h4>
+    <div class="col-12">
+        @Html.ActionLink("Return to List", "Index", "Requests", new { status = ViewBag.Status }, new { @class = "text-primary" })
+    </div>
+</div>
+
+<div>
+    @using (Html.BeginForm("Submit", "Requests", FormMethod.Post, new { role = "form " }))
+    {
+        @Html.HiddenFor(model => model.RequestID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.ScholarshipID)
+        @Html.HiddenFor(model => model.Scholarship)
+        @Html.HiddenFor(model => model.PeriodID)
+        @Html.HiddenFor(model => model.ValidationPeriod)
+        @Html.HiddenFor(model => model.DateFilled)
+
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="shadow-sm p-4 pt-2 rounded my-2" id="carditem">
+                    <div class="form">
+                        <h5>Details</h5>
+
+                        <div class="row my-2">
+                            <label class="col">Name</label>
+                            <div class="col-lg-12">
+                                <div class="form-control-plaintext border rounded p-2">
+                                    @Html.DisplayFor(model => model.AspNetUser.UserProfiles.First().StudentProfile.FirstName)
+                                    @Html.DisplayFor(model => model.AspNetUser.UserProfiles.First().StudentProfile.MiddleName)
+                                    @Html.DisplayFor(model => model.AspNetUser.UserProfiles.First().StudentProfile.LastName)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <label class="col">
+                                Scholarship Availed
+                            </label>
+                            <div class="col-lg-12">
+                                @Html.TextBoxFor(model => model.Scholarship.ScholarshipName, new { @readonly = "readonly", @class = "form-control-plaintext border rounded p-2" })
+                            </div>
+                        </div>
+
+
+                        <div class="row my-2">
+                            <label class="col">
+                                Date Filled
+                            </label>
+                            <div class="col-lg-12">
+                                @Html.TextBoxFor(model => model.DateFilled, new { @readonly = "readonly", @class = "form-control-plaintext border rounded p-2" })
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <label class="col">
+                                Academic Year
+                            </label>
+                            <div class="col-lg-12">
+                                <div class="form-control-plaintext border rounded p-2">
+                                    @Html.DisplayFor(model => model.ValidationPeriod.AcademicYearStart)
+                                    @Html.DisplayFor(model => model.ValidationPeriod.AcademicYearEnd)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <label class="col">
+                                Term
+                            </label>
+                            <div class="col-lg-12">
+                                @Html.TextBoxFor(model => model.ValidationPeriod.Term, new { @readonly = "readonly", @class = "form-control-plaintext border rounded p-2" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @*@if (ViewBag.Siblings != null)
+                    {
+                        var siblingModel = (MCLScholarWeb.Models.Entity.SiblingDiscount) ViewBag.Siblings;
+                        Html.RenderPartial("~/Admin/_SiblingDiscount.cshtml", siblingModel);
+                    }*@
+                <div class="shadow-sm p-4 py-2 my-2 rounded" id="carditem">
+                    @{
+                        <h5>Attachments</h5>
+
+                        int ctr = 1;
+                        if (Model.RequestResources.ToList().Count == 0)
+                        {
+                            <p>No Attatched files found</p>
+                        }
+                        else
+                        {
+                            foreach (var res in Model.RequestResources)
+                            {
+                                <a href="@res.FileLocationStorage.FileLocation" class="btn btn-primary">@res.FileLocationStorage.FileName</a>
+                                ctr++;
+                            }
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="shadow-sm p-4 pt-2 rounded my-2" id="carditem">
+                    <h5>Actions</h5>
+
+                    <div class="row">
+                        <label for="staticEmail" class="col-lg-12 col-form-label">
+                            Status
+                        </label>
+                        <div class="col-lg-12">
+                            @Html.DropDownListFor(model => model.StatusID, @statuses, "Select an Item", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <label>
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </label>
+                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control border " })
+                    <div class="row pt-3">
+                        <div class="col-lg-9"></div> <button type="submit" class="btn col-lg-3 btn-primary" onclick="return confirm('Confirm Action');"> Done </button>
+
+                    </div>
+                </div>
+
+
+
+                @if (Model.ValidationStatu.StatusName.Equals("Approved"))
+                {
+                    <div class="shadow-sm p-4 pt-2 rounded my-2" id="carditem">
+                        <h5>Approval Details</h5>
+                        <label for="staticEmail" class="col-lg-12 col-form-label">
+                        </label>
+                        <div class="row">
+                            <label class="col">
+                                Approved by
+                            </label>
+                            <div class="col-lg-12">
+                                @Html.TextBoxFor(model => model.AspNetUser1.Email, new { @readonly = "readonly", @class = "form-control-plaintext border rounded p-2" })
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <label class="col">
+                                Date Approved
+                            </label>
+                            <div class="col-lg-12">
+                                @Html.TextBoxFor(model => model.DateEvaluated, new { @readonly = "readonly", @class = "form-control-plaintext border rounded p-2" })
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    #carditem {
+        background: #ffffff;
+    }
+</style>

@@ -1,0 +1,92 @@
+﻿@model MCLScholarWeb.Models.Entity.Scholarship
+
+@{
+    ViewBag.Title = "Edit Scholarships";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<style>
+    h-scholarships {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4">Upload Scholarship Details</h1>
+
+    @using (Html.BeginForm("UploadScholarshipDetails", "AdminContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row my-2 p-2">
+            <div class="col-8">
+                <h4>@Html.DisplayFor(model => model.ScholarshipName)</h4>
+            </div>
+            <div class="col-4">
+                <input type="submit" value="Save" class="btn btn-primary float-right" onclick="return confirm('Confirm Action');" />
+            </div>
+            <div class="col-12">
+                @Html.ActionLink("Return to List", "Scholarships", "Admin", null, new { @class = "text-primary" })
+            </div>
+        </div>
+
+        <div class="card rounded border p-3">
+            <div class="form-horizontal">
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.ScholarshipID)
+                @Html.HiddenFor(model => model.ScholarshipName)
+                @Html.HiddenFor(model => model.ApplicationForm)
+                @Html.HiddenFor(model => model.PeriodID)
+                @Html.HiddenFor(model => model.ScholarshipTypeID)
+                @Html.HiddenFor(model => model.ScholarshipDescription)
+
+                <div class="form-group">
+                    <p class="control-label col-md-10">Scholarship Type</p>
+                    <div class="col-md-12">
+                        <p class="form-control col-lg-12">@Model.ScholarshipType.ScholarshipTypeName</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-10">Scholarship Description</p>
+                    <div class="col-md-12 mb-3">
+                        @Html.TextAreaFor(model => model.ScholarshipDescription, new { @class = "form-control", rows = "5", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ScholarshipDescription, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-12">
+                        <textarea name="newDescription" class="form-control" rows ="10" required placeholder="Add new description"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    }
+
+</div>

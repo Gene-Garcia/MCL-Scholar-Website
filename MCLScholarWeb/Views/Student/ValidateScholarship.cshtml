@@ -1,0 +1,105 @@
+﻿@model MCLScholarWeb.Models.Entity.ValidationRequest
+
+@{
+    ViewBag.Title = "Validate Scholarship";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #s-validate-scholarship {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                    @if (!(bool)ViewBag.isStudentPassedApplicationForm)
+                    {
+                        <p class="mt-4">
+                            <span class="text-warning font-weight-bold">
+                                Note: The system has noticed that you have not passed an application form for this scholarship or you are first timer scholar.
+                            </span>
+                            <br />
+                            <span class="mt-4">
+                                Please pass an application form for your request to be validated. Application form can be downloaded at <a href="/WebsiteContent/DownloadableForms" target="_blank" class="btn btn-success btn-sm">Forms</a>
+                            </span>
+                        </p>
+                    }
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4 mb-5">Validate Scholarship</h1>
+
+    @if (Model != null)
+    {
+
+        using (Html.BeginForm("ValidateScholarship", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.HiddenFor(model => model.ScholarshipID);
+            @Html.HiddenFor(model => model.DateFilled);
+            @Html.HiddenFor(model => model.UserID);
+            @Html.HiddenFor(model => model.StatusID);
+            @Html.HiddenFor(model => model.PeriodID);
+            @Html.HiddenFor(model => model.Processed);
+            @Html.HiddenFor(model => model.Remarks);
+            var column = "12";
+
+            <div class="form-horizontal">
+
+                @if (ViewBag.isScholarshipSiblingDiscount)
+                {
+                    column = "6";
+                    <div class="col-md-5 shadow p-5 mb-5 bg-white rounded">
+                        <p class="ml-2">Parent's Full Name</p>
+                        <input type="text" name="parentFirstName" placeholder="Parents First Name" class="form-control col-md-12 mb-3" required />
+                        <input type="text" name="parentMiddleName" placeholder="Parents Middle Name" class="form-control col-md-12 mb-3" required />
+                        <input type="text" name="parentLastName" placeholder="Parents Last Name" class="form-control col-md-12 mb-3" required />
+                    </div>
+                }
+
+                <div class="col-md-1"></div>
+
+                <div class="col-md-@column shadow p-5 mb-5 bg-white rounded">
+
+                    <div class="form-group">
+                        <p class="ml-5 mb-4">Attach the scholarship validation form and other documents here!</p>
+                        <div class="col-md-12">
+                            <input type="file" name="scholarshipForms" class="col-md-12 mb-3" accept="application/pdf" required />
+                        </div>
+                    </div>
+
+                    <div class="ml-1 form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Request" class="col-md-4 btn btn-success" />
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+
+</div>

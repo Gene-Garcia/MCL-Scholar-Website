@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.UserProfile>
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Students</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="p-4 shadow rounded" style="background:#ffffff">
+    <table class="table table-striped table-bordered" id="example">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentProfile.StudentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentProfile.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentProfile.MiddleName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentProfile.LastName)
+                </th>
+            </tr>
+        </thead>
+  
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentProfile.StudentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentProfile.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentProfile.MiddleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentProfile.LastName)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+

@@ -1,0 +1,46 @@
+﻿@model MCLScholarWeb.Models.Entity.StudentProfile
+
+@{
+    string name = string.Format("{0} {1} {2}",Model.FirstName,Model.MiddleName,Model.LastName);
+ }
+<div class="card rounded border p-4 my-2">
+    <h5>Profile</h5>
+    <div class="row">
+        <div class="col-lg-6 ">
+            @Html.Label("StudentID", "StudentID", new { @class = " col-form-label" })
+            @Html.TextBox("StudentID", Model.StudentID, new { @class = "form-control " })
+            @Html.Label("Name", "Name", new { @class = " col-form-label" })
+            @Html.TextBox("Name", name, new { @class = "form-control " })
+            @Html.Label("ContactNumber", "Contact Number", new { @class = " col-form-label" })
+            @Html.TextBox("ContactNumber", Model.ContactNumber, new { @class = "form-control " })
+        </div>
+        <div class="col-lg-6 ">
+            <div class="col mt-2">
+                <div class="row">
+                    @Html.Label("Program", "Program", new { @class = "col-form-label col-lg-8" })
+                    @Html.Label("Year", "Year", new { @class = "col-form-label col-lg-4" })
+                    @Html.TextBox("Program", Model.Program, new { @class = "form-control col-lg-8" })
+                    @Html.TextBox("Year", Model.Year, new { @class = "form-control col-lg-4" })
+
+                </div>
+            </div>
+            @Html.Label("Department", "Department", new { @class = "col-form-label" })
+            @Html.TextBox("Department", Model.Department, new { @class = "form-control " })
+            <div class="col mt-2">
+                <div class="row">
+                    @Html.Label("TWA", "TWA", new { @class = "col-form-label col-3" })
+                    @Html.TextBox("TWA", Model.TWA, new { @class = "form-control col-3" })
+
+                    @Html.Label("GWA", "GWA", new { @class = " col-form-label col-3" })
+
+                    @Html.TextBox("GWA", Model.GWA, new { @class = "form-control col-3" })
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+

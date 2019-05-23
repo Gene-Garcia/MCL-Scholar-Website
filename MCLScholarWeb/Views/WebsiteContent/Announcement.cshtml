@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.Announcement>
+
+@{
+    ViewBag.Title = "Announcement";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #h-announcements{
+        font-weight:bold;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>  
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    <h1 class="display-4 mt-4 mb-5">Announcements</h1>
+
+    @if (Model != null)
+    {
+
+        foreach (var item in Model)
+        {
+            <div class="row mb-5">
+
+                <div class="p-4 shadow-lg rounded" style="border-color:white; border-radius:10px;">
+
+                    @{ 
+                        var classDiv = "col-lg-8";
+                        if (item.AnnouncementResources.Count > 0)
+                        {
+                            classDiv = "col-lg-8";
+                        }
+                        else
+                        {
+                            classDiv = "col-md-12";
+                        }
+                        
+                    }
+
+                    <div class="@classDiv">
+                        <h3 class="">@item.AnnouncementSubject</h3>
+
+                        <p>
+                            @item.DateAdded
+                        </p>
+
+                        <p id="announcement-text" style="line-height: 1.8;">
+                            @item.AnnouncementContent
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        @{
+                            var resources = item.AnnouncementResources;
+
+                            <div id="announcement-images-@item.AnnouncementID" class="carousel slide" data-interval="3000">
+                                <div class="carousel-inner">
+                                    @{
+                                        string active = "";
+                                        int imageCount = 0;
+                                    }
+
+                                    @foreach (var resource in resources)
+                                    {
+                                        if (imageCount == 0)
+                                        {
+                                            active = "active";
+                                        }
+                                        else
+                                        {
+                                            active = "";
+                                        }
+                                        imageCount++;
+
+                                        var locStorage = resource.FileLocationStorage;
+
+                                        <div class="carousel-item @active">
+                                            <img src="@locStorage.FileLocation" class="img img-responsive mb-2 d-block mx-auto" alt="" style="height: 80%; width: 80%; object-fit: fill;" />
+                                        </div>
+
+                                        if(imageCount > 1) {
+                                            <a class="carousel-control-prev" href="#announcement-images-@item.AnnouncementID" data-slide="prev">
+                                                <span class=""></span>
+                                                <img src="~/Content/Images/back.png" width="30" height="30" class="m-3"/>
+                                            </a>
+                                            <a class="carousel-control-next" href="#announcement-images-@item.AnnouncementID" data-slide="next">
+                                                <img src="~/Content/Images/right-arrow.png" width="30" height="30"  class="m-3"/>
+                                            </a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    }
+
+</div>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.PreValidatedStudent>
+
+@{
+    ViewBag.Title = "Scholars";
+   Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<style>
+    #h-scholars {
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+
+    @try
+    {
+        if (ViewBag.errorMessage != null)
+        {
+
+            <div class="row">
+
+                <div class="col-md-12 shadow p-3 bg-white rounded">
+
+                    <p class="text-danger p-3">@ViewBag.errorMessage</p>
+
+                </div>
+
+            </div>
+
+        }
+
+    }
+    catch (Exception e) { }
+
+    @if (Model.Count() > 0)
+    {
+        <h2 class="display-4 mt-4 mb-5">@Model.First().Scholarship.ScholarshipName</h2>
+
+        try
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="font-weight-bold">Term @Model.First().ValidationPeriod.Term</p>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="font-weight-bold">S.Y. @Model.First().ValidationPeriod.AcademicYearStart - @Model.First().ValidationPeriod.AcademicYearEnd</p>
+                </div>
+            </div>
+        }
+        catch (Exception e) { }
+
+            <table class="table table-hover table-responsive-md">
+                <thead>
+                    <tr>
+                        <th>Surname</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Program</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="p-4">@item.AspNetUser.UserProfiles.Where(m => m.UserID == item.UserID).FirstOrDefault().StudentProfile.LastName</td>
+                            <td class="p-4">@item.AspNetUser.UserProfiles.Where(m => m.UserID == item.UserID).FirstOrDefault().StudentProfile.FirstName</td>
+                            <td class="p-4">@item.AspNetUser.UserProfiles.Where(m => m.UserID == item.UserID).FirstOrDefault().StudentProfile.MiddleName</td>
+                            <td class="p-4">@item.AspNetUser.UserProfiles.Where(m => m.UserID == item.UserID).FirstOrDefault().StudentProfile.Program</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        <a href="@Url.Action("ScholarSelection", "WebsiteContent")" class="btn btn-success">Return</a>
+
+    }
+</div>

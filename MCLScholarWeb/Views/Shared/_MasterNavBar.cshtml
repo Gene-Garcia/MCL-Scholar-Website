@@ -1,0 +1,11 @@
+﻿
+@{
+
+    Html.RenderPartial("~/Views/Shared/_WebsiteNavbar.cshtml");
+
+    if (User.IsInRole("Student"))
+    {
+        Html.RenderPartial("~/Views/Shared/_StudentNavBar.cshtml");
+    }
+
+}

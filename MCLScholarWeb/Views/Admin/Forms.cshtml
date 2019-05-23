@@ -1,0 +1,151 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.Form>
+
+@{
+    ViewBag.Title = "Forms";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row m-2 p-2 mt-4">
+    <h4 class="col-md-10 display-4">Forms</h4>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Create New</button>
+    </div>
+</div>
+
+
+
+
+<div class="p-3" id="">
+    <div class="card rounded border p-3">
+        <table class="table display dt-responsive " id="Data" style="width:100%">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>
+                        Subject
+                    </th>
+                    <th>
+                        Date Added
+                    </th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FormID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FormsResources.FirstOrDefault().FileLocationStorage.FileName)</td>
+                        <td>@item.DateAdded.ToShortDateString()</td>
+                        <td>
+                            @using (Ajax.BeginForm("EditForm", "AdminContent", new {  formID = item.FormID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "editModalContent", OnSuccess = "$('#editModal').modal('show')" }))
+                            {
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @{
+                Html.RenderPartial("_UploadForm", new MCLScholarWeb.Models.Entity.Form());
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="editModal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="editModalContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    #list {
+        background: #808080;
+    }
+</style>
+
+
+
+<script>
+    $(document).ready(function () {
+        var table = $('#Data').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false
+                }
+            ]
+        });
+
+
+    });
+</script>
+
+
+
+
+
+@*<div class="card rounded border p-3">
+        <table class="table" id="#Data">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateAdded)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateAdded)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>*@
+<script>
+    $(document).ready(function () {
+        var table = $('#Data').DataTable();
+    });
+</script>

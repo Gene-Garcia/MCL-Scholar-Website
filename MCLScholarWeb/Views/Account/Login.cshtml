@@ -1,0 +1,52 @@
+﻿@using MCLScholarWeb.Models.Entity
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+<br>
+<div class="modal-dialog">
+    <div class="modal-content page-header">
+        <div class="modal-heading pt-4 pb-2">
+            <img src='~/Content/Images/mcllogo.png' class='mx-auto d-block'>
+        </div>
+        <div class="modal-body px-5  ">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form " }))
+            {
+
+                @Html.AntiForgeryToken()
+                <h5>Sign in using MCL Scholar Account</h5>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger " })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <p class="text-left">
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+
+                </p>
+                <div class="row pb-3 ">
+                    <div class="col-5"></div>
+                    <input type="button" value="Back" onclick="@("window.location.href='" + @Url.Action("Announcement", "WebsiteContent") + "'");" class="btn btn-default col-3">
+                    <button type="submit" class="btn btn-primary col-3 ">Login</button>
+                </div>
+
+            }
+
+
+            @*@<div class="col-md-4">
+                    <section id="socialLoginForm">
+                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    </section>
+                </  div>*@
+        </div>
+    </div>
+</div>
+
+

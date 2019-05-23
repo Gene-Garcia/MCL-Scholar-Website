@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6d8d95a6f7a49efac8b81c1538116f0" Name="Diagram1">
+        <EntityTypeShape EntityType="lipatdbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AdminAuditLog" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AnnouncementResource" Width="1.5" PointX="7.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.Announcement" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AspNetRole" Width="1.5" PointX="6" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AspNetUserRole" Width="1.5" PointX="8.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.AspNetUser" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.FileLocationStorage" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.Form" Width="1.5" PointX="5.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.FormsResource" Width="1.5" PointX="7.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.Parent" Width="1.5" PointX="11.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.PreValidatedStudent" Width="1.5" PointX="8.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.Program" Width="1.5" PointX="9" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.RequestResource" Width="1.5" PointX="13.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.Scholarship" Width="1.5" PointX="3" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.ScholarshipType" Width="1.5" PointX="0.75" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.SiblingDiscount" Width="1.5" PointX="13.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.StudentProfile" Width="1.5" PointX="8" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.UserProfile" Width="1.5" PointX="10.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.UserProgram" Width="1.5" PointX="11.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.ValidationPeriod" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.ValidationRequest" Width="1.5" PointX="11.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.ValidationStatu" Width="1.5" PointX="9" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="lipatdbModel.WebSetting" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
+        <AssociationConnector Association="lipatdbModel.FK_AdminAuditLog_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_AnnouncementResources_Announcements" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_AnnouncementResources_FileLocationStorage" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_Announcements_Announcements" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_AspNetUsers_ValidationPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_Forms_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_PreValidatedStudents_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_UserProfile_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_UserProgram_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_ValidationRequests_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_ValidationRequests_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_FormsResources_FileLocationStorage" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_RequestResources_RequestResources" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_FormsResources_Forms" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_SiblingDiscount_Parents" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_PreValidatedStudents_Scholarships" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_PreValidatedStudents_ValidationPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_UserProgram_Program" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_RequestResources_ValidationRequests" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_Scholarships_ScholarshipTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_Scholarships_ValidationPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_ValidationRequests_Scholarships" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_SiblingDiscount_ValidationRequests" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_UserProfile_StudentProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_ValidationRequests_ValidationPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_WebSettings_ValidationPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="lipatdbModel.FK_ValidationRequests_ValidationStatus" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

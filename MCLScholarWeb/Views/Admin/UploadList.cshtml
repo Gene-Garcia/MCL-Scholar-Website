@@ -1,0 +1,96 @@
+﻿
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "UploadList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    bool hasMessage = ViewBag.HasMessage;
+    if (hasMessage)
+    {
+        string message = ViewBag.Message;
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@using (Ajax.BeginForm("_ReviewList", null, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ReviewPartial" }, new { enctype = "multipart/form-data", id = "frmUploader" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col">
+        <div class="row ">
+            <h4 class="display-4 mt-4 mb-5">Upload List of Pre-Validated Scholars</h4>
+        </div>
+        <div>
+
+            <div class="row">
+                    <input type="submit" class="btn btn-primary col-lg-1" value="Submit" />
+                <div class="custom-file col-lg-11">
+                    <input class="custom-file-input" name="file" type="file" id="customFile" value="Select File" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required />
+                    <label class="custom-file-label" type for="customFile">Choose file</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+}
+
+<div class="card border-0 p-3" id="ReviewPartial">
+    <div class="col-lg-12 p-6 m-6" align="center">
+        <img src="~/Content/Images/cloud-upload.png" style="width: 10%; height:40%; min-width:10%; min-height:30%;"/>
+        <p><a class="text-primary" href="/Admin/DownloadTemplate">Download</a> the Excel template</p>
+        <div class="py-6 m-3">
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .file {
+        visibility: hidden;
+        position: absolute;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        window.addEventListener("submit", function (e) {
+            var form = e.target;
+            if (form.getAttribute("enctype") === "multipart/form-data") {
+                if (form.dataset.ajax) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    var xhr = new XMLHttpRequest();
+                    xhr.open(form.method, form.action);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            if (form.dataset.ajaxUpdate) {
+                                var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
+                                if (updateTarget) {
+                                    updateTarget.innerHTML = xhr.responseText;
+                                }
+                            }
+                        }
+                    };
+                    xhr.send(new FormData(form));
+                }
+            }
+        }, true);
+    });
+
+    $(document).on('change', '.custom-file-input', function (event) {
+        $(this).next('.custom-file-label').html(event.target.files[0].name);
+    });
+</script>
+
+

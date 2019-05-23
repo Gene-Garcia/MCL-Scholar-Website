@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "Admin Manual";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .text-justify {
+        line-height: 2.0;
+    }
+
+    .container p {
+        color:black;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h3 class="text-center mb-3">Welcome!</h3>
+                <p class="text-center" style="line-height: 2.0;">
+
+                    This website allows the admin to post and upload announcement, forms concerning scholarships, scholarships available, list of scholars. Furthermore, the admins could validate the request filed by students, generate report and have access to the dashboard.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Creating Admin and Volunteer Accounts</h5>
+                <p class="text-justify">
+
+                    To create accounts that you must go to <a href="" class="text-link" style="font-weight: 600">Administrators</a> for new admins or <a href="" class="text-link" style="font-weight: 600">Volunteer</a> for volunteers.
+
+                    <br>
+
+                    There will be fields where you, the admin, will input the account information of the user. No other information is needed.
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Evaluating Validation Requests</h5>
+                <p class="text-justify">
+
+                    In the navigation bar there will be a section named Validation Requests and contains <a href="" class="text-link" style="font-weight: 600">Queue</a> for requests that have not been evaluated, <a href="" class="text-link" style="font-weight: 600">Approved</a> for approved requests, <a href="" class="text-link" style="font-weight: 600">Declined</a> for evaluted requests but are declined, and <a href="" class="text-link" style="font-weight: 600">Missing Requirement(s)</a> for requests that are missing documents. By clicking this link a clickable table will be displayed. To choose a request to be validated you must click on the row.
+
+                    <br><br>
+
+                    Once you have selected a request the information and data of the student will be displayed. The information are student name, student id, scholarship name, date filled, academic year, term, documents uploaded, and status.
+                    <br>
+                    There will be a textbox where you could add comments or remarks to the request and the student can view this remarks.
+                    <br>
+                    In the status, if it is not <i>Approved</i> then there will be dropdown and you must choose if from <i>Queue, Approved, Declined and Missing Requirement(s)</i>. And once finished in evaluating you need to click <span class="btn btn-primary btn-sm">Done</span> for the changes to reflect.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Modifying Website Content</h5>
+                <p class="text-justify">
+                    In the navigation bar there will be section name Website Content that contains <a href="" class="text-link" style="font-weight: 600">Announcements</a> for posting and editing announcements, <a href="" class="text-link" style="font-weight: 600">Scholarships</a> for creating and editing scholarships, <a href="" class="text-link" style="font-weight: 600">Downloadable Forms</a> for uploading and editing forms, and <a href="" class="text-link" style="font-weight: 600">Upload List</a> for uploading list of scholars through an excel file.
+                    <br>
+                    By click on the first three links the website will display all the current announcements, scholarships, or forms where you could choose one and edit it. Furthermore, by clicking <span class="btn btn-primary btn-sm">Create New</span> can add a new item. On the other hand by clicking on the fourth and last link you will redirected to uploading an excel with the list of scholars.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Announcements</h5>
+                <p class="text-justify">
+
+                    In posting a new announcement, you need enter the announcement subject and content, and the images are optional. Only png and jpeg files will be accepted. Once finished the <span class="btn btn-outline-success btn-sm">Upload</span> will post the announcement.
+                    <br><br>
+                    In editing, the announcement information will displayed for editing such as the subject, content, and images if there are any. To upload new image then you must add files to the file uploader. For changes to reflect you must click the <span class="btn btn-ouline-success btn-sm">Save</span> Moreover, to archive the announcement the <span class="btn btn-outline-warning btn-sm">Archive Announcement</span>
+                    To delete an uploaded image you must click the <span class="btn btn-outline-danger btn-sm">Delete Picture</span>
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Scholarships</h5>
+                <p class="text-justify">
+
+
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Downloadable Forms</h5>
+                <p class="text-justify">
+
+                    In posting new downloadable form, you need enter the description and actual file. Only pdf files will be accepted. Once finished the <span class="btn btn-outline-success btn-sm">Upload</span> will upload the form.
+                    <br><br>
+                    In editing, the downloadable form information will displayed for editing such as the description and the file. To upload new file then you must add files to the file uploader. However, there can only be one file per downloadable form only. For changes to reflect you must click the <span class="btn btn-outline-success btn-sm">Save</span> Moreover, to delete the form you must click <span class="btn btn-outline-warning btn-sm">Delete Form</span>
+                    <br>
+                    To delete an uploaded image you must click the <span class="btn btn-outline-danger btn-sm">Delete Picture</span> and through this you can now upload a new file.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Upload List</h5>
+                <p class="text-justify">
+
+                    To upload scholars you must add the list to an excel file. You can download this file for the template that the website use <a href="" class="btn btn-outline-success"><img src="~/Content/Images/Excel.png" height="25" width="25">   Template</a>
+                    <br>
+                    You must upload the list to the file uploader. Once a file has been uploaded then you now click
+                    <span class="btn btn-outline-secondary btn-sm">Submit</span> for the excel file to be processed. After the processing of the excel file you will now be asked to review the processed list. The <span class="btn btn-secondary btn-sm">Accept</span> will accept the processed list and will reflect in the database, and <span class="btn btn-secondary btn-sm">Discard</span> will delete the list and will not reflect in the database.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Admin Dashboard</h5>
+                <p class="text-justify">
+
+                    To go the the admin dashboard, you must navigate in the navigation bar and find the section name Statistics and the link to <a href="" class="text-link" style="font-weight: 600">Dashboard</a>
+                    <br>
+                    In the initial start of the dashboard the default year range will be current academic year. However the you could still choose your own date range. To choose the range there will be a dropdown to choose from and the <span class="btn btn-info btn-sm">&#8635;</span> will refresh the page will change the selected year, and selected academic year will be inserted to the textbox
+                    <br>
+                    The dashboard will contain the number of validated and not validated students, number of registered students that are verified and are not, number of academic and non academic scholars, and the list of all scholarships.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Reports</h5>
+                <p class="text-justify">
+
+                    In generating reports you just need to choose a school year and the term. After selecting the year and term click the <span class="btn btn-primary btn-sm">Submit</span> and would generate the report. After generating repor you have the option to export it as pdf.
+
+                    <br />
+
+                    <span class="ml-3" style="line-height: 3.0;">
+                        <b>1</b> Term Report
+                    </span>
+                    <br />
+                    <span class="ml-3" style="line-height: 3.0;">
+                        <b>2</b> Students Record Report
+                    </span>
+                    <br />
+                    <span class="ml-3" style="line-height: 3.0;">
+                        <b>3</b> Requests Record Report
+                    </span>
+                    <br />
+                    <span class="ml-3" style="line-height: 3.0;">
+                        <b>4</b> Scholars Report
+                    </span>
+
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow p-4 mb-4 bg-white rounded">
+                <h5 class="mb-3">Opening the Scolarship Validation</h5>
+                <p class="text-justify">
+
+                    For the students to be able to file a validation request they must login first. However, to login the Validation must be opened. And to do that you must first set the current academic year, term and open the scholarship in the <a href="" class="text-link" style="font-weight: 600">Settings</a>. After the season of validation is finished you must set the validation to close.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<MCLScholarWeb.Models.Entity.Scholarship>
+
+@{
+    ViewBag.Title = "Scholarships";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row m-2 p-2 mt-4">
+    <h4 class="col-md-10 display-4">Scholarships</h4>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Create New</button>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @{
+                Html.RenderPartial("_CreateScholarship", new MCLScholarWeb.Models.Entity.Scholarship(), new ViewDataDictionary { { "Types", ViewBag.Types } });
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="p-3" id="">
+    <div class="card rounded border p-3">
+        <table class="table display dt-responsive" id="Data" style="width:100%">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Type
+                    </th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ScholarshipID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ScholarshipName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ScholarshipType.ScholarshipTypeName)</td>
+                        <td>
+                            <div>
+
+                            </div>
+
+                            <center>
+                                @using (Ajax.BeginForm("ViewScholars", "Admin", new { id = item.ScholarshipID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "editModalContent", OnSuccess = "$('#editModal').modal('show')" }))
+                                {
+                                    <button type="submit" class="btn btn-info mb-2">Scholars</button>
+                                }
+                                @using (Ajax.BeginForm("EditScholarship", "Admin", new { id = item.ScholarshipID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "editModalContent", OnSuccess = "$('#editModal').modal('show')" }))
+                                {
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                }
+                            </center>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="editModal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id="editModalContent">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<style>
+    #list {
+        background: #808080;
+    }
+</style>
+
+
+<script>
+    $(document).ready(function () {
+        var table = $('#Data').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false
+                }
+            ]
+        });
+
+
+    });
+    $(".Item").click(function () {
+
+    });
+</script>
+
+
